@@ -1,0 +1,9 @@
+{
+  "extends": "@impress/typescript-config/solid-library.json",
+  "compilerOptions": {
+    "declarationMap": true,
+    "customConditions": ["@impress/source"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
