@@ -1,4 +1,13 @@
 {
   "extends": "@rs/typescript-config/storybook.json",
-  "include": ["src", ".storybook", "../website-components/src", "../../packages/storybook/src"]
+  "compilerOptions": {
+    "customConditions": ["@rs/source"]
+  },
+  "include": [
+    "src",
+    ".storybook",
+    "../web-app/src/components",
+    "../website-components/src",
+    "../../packages/storybook/src"
+  ]
 }

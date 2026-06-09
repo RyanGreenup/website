@@ -1,23 +1,20 @@
 ---
 import { ClientRouter } from "astro:transitions";
-
-// Design system: global.css pulls in the IBM Plex webfonts and the plain-CSS
-// token layer (and sets the body surface); theme.css registers the typed
-// role/status theme contract on :root so recipes resolve their colours and
-// flip light/dark. Importing both here applies them site-wide.
 import "@rs/ryan-personal-website-design/global.css";
 import "@rs/ryan-personal-website-design/theme.css";
+import "../styles/ui.css";
 
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import Seo from "../components/Seo.astro";
 
 interface Props {
-  /** Page title for the document and SEO. */
   readonly title: string;
-  /** Meta description for the document and SEO. */
   readonly description?: string;
+  readonly wide?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, wide = false } = Astro.props;
 ---
 
 <html lang="en">
@@ -29,6 +26,70 @@ const { title, description } = Astro.props;
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main" class={wide ? "rail rail--wide" : "rail"}>
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <style is:global>
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: var(--spacing-4);
+        top: var(--spacing-2);
+        transform: translateY(-150%);
+        z-index: 50;
+        background: var(--accent);
+        color: var(--fg-on-accent);
+        padding: var(--spacing-2) var(--spacing-4);
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+        font-weight: var(--weight-medium);
+        transition: transform var(--duration-base) var(--ease-standard);
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .rail {
+        flex: 1 0 auto;
+        width: 100%;
+        max-width: var(--content-max);
+        margin-inline: auto;
+        padding-inline: var(--spacing-6);
+        padding-block: var(--spacing-16) var(--spacing-24);
+      }
+      .rail--wide {
+        max-width: 72rem;
+      }
+
+      @media (max-width: 640px) {
+        .rail {
+          padding-inline: var(--spacing-5);
+          padding-block: var(--spacing-10) var(--spacing-16);
+        }
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
+      }
+    </style>
   </body>
 </html>

@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>;
+}
+const { page } = Astro.props;
+---
+
+<BaseLayout title="Blog" description="Writing by Ryan Greenup on systems, CSS architecture, and shipping less.">
+  <header class="page-head">
+    <p class="kicker">Writing</p>
+    <h1 class="page-head__title">Notes from the work.</h1>
+    <p class="page-head__lede">
+      Occasional posts on systems design, CSS architecture, and the discipline of
+      shipping less. No newsletter, no popups.
+    </p>
+  </header>
+
+  <div class="post-list">
+    {
+      page.data.map((post) => (
+        <PostCard
+          href={`/blog/${post.id}`}
+          title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          tags={post.data.tags}
+        />
+      ))
+    }
+  </div>
+
+  {
+    page.lastPage > 1 && (
+      <nav class="pager" aria-label="Pagination">
+        {page.url.prev ? (
+          <a class="btn btn--secondary" href={page.url.prev}>&larr; Newer</a>
+        ) : (
+          <span />
+        )}
+        <span class="pager__count">
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next ? (
+          <a class="btn btn--secondary" href={page.url.next}>Older &rarr;</a>
+        ) : (
+          <span />
+        )}
+      </nav>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 42rem;
+  }
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-10);
+    max-width: 42rem;
+  }
+  .pager__count {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--fg-tertiary);
+  }
+</style>

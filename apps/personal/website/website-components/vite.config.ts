@@ -1,25 +1,28 @@
 /// <reference types="vitest/config" />
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
-import { playwright } from '@vitest/browser-playwright'
-import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { playwright } from "@vitest/browser-playwright";
+import { defineConfig } from "vite";
+import solid from "vite-plugin-solid";
 
 export default defineConfig({
-  root: './playground',
+  root: "./playground",
   // Consume workspace packages (the design system, this lib) as source, matching
   // how Storybook and the Astro app resolve them.
   resolve: {
-    conditions: ['@rs/source'],
+    conditions: ["@rs/source"],
+  },
+  optimizeDeps: {
+    include: ["@vanilla-extract/recipes/createRuntimeFn"],
   },
   plugins: [solid(), vanillaExtractPlugin()],
   test: {
-    root: '.',
-    environment: 'node',
+    root: ".",
+    environment: "node",
     browser: {
       enabled: true,
       provider: playwright(),
-      instances: [{ browser: 'chromium' }],
+      instances: [{ browser: "chromium" }],
       headless: true,
     },
   },
-})
+});

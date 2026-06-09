@@ -1,0 +1,957 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { MathTex } from '@rs/ryan-personal-website-components';
+
+/** Controls whether to show summary stats of Impact */
+const SHOW_STAT_CARD_SLASH_LOG = false;
+
+/** Controls whether to show the open to work badge, currently it's a bit much so off */
+const SHOW_OPEN_TO_WORK_BADGE = false;
+/* Headline outcomes, surfaced as a results ledger */
+const ledger = [
+  { kind: 'save', no: '01', sign: '-', what: 'Infrastructure spend', note: 'Re-platformed onto Postgres / ClickHouse', verb: 'saved', to: 24, prefix: '$', suffix: 'K/yr' },
+  { kind: 'save', no: '02', sign: '-', what: 'Vendor contract', note: 'Renegotiated the DynamoDB to Postgres integration', verb: 'cut', to: 50, prefix: '', suffix: '%' },
+  { kind: 'add', no: '03', sign: '+', what: 'Weekly client reporting', note: 'Manual workflow, now fully automated', verb: 'freed', to: 20, prefix: '', suffix: 'hrs/wk' },
+  { kind: 'ship', no: '04', sign: '+', what: 'Historical client data', note: 'Heterogeneous sources into tested, validated ETL', verb: 'migrated', to: 10, prefix: '', suffix: 'yrs' },
+];
+
+const experience = [
+  {
+    role: 'Software Engineer',
+    org: 'We Are Impress',
+    location: 'Melbourne',
+    period: 'Feb 2026 to Present',
+    tag: 'Now',
+    tagKind: 'now',
+    points: [
+      'Full ownership of production infrastructure spanning AWS EC2 (RHEL) and DigitalOcean Kubernetes clusters: GitOps via Flux, Traefik ingress with Let\'s Encrypt, Authelia SSO, SOPS-managed secrets, and OpenTofu provisioning',
+      'Deliver frontend work across client engagements including National Intermodal, the SunRice brand family (<span class="num">5</span> regional sites across AU, US & NZ), Ratch Australia and Stone & Chalk',
+      'Build internal diagnostics tooling combining the TypeScript compiler API, oxlint, and a codegraph index with PageRank to surface the most actionable error first',
+      'Develop a JSX-to-IR transformer package used across the agency component pipeline',
+    ],
+  },
+  {
+    role: 'Contract Software Engineer',
+    org: 'CCAFP',
+    location: 'Melbourne',
+    period: '2025 to 2026',
+    tag: 'Contract',
+    tagKind: 'contract',
+    points: [
+      'Designed and deployed an LLM-automated superannuation application: SolidJS + Tailwind SPA backed by PostgreSQL, serving financial planning workflows end to end',
+      'Integrated AWS Bedrock as the inference layer to automate superannuation assessment and reduce manual case handling',
+      'Deployed to Kubernetes with Flux GitOps: manifests, secrets, and rollouts through version-controlled configuration',
+      'Mentored a junior developer through the full build cycle, reviewing code and transferring stack knowledge at each stage',
+    ],
+  },
+  {
+    role: 'Lead Developer · Full-Stack Data Engineer',
+    org: 'Gforce Category Solutions',
+    location: 'Melbourne',
+    period: 'Nov 2024 to Feb 2026',
+    tag: null,
+    tagKind: null,
+    points: [
+      'Architected, provisiooned and deployed a PostgreSQL data pipeline to automate weekly client reporting, reducing workload by easily 30 hours per week per office',
+      'Negotiated terms for DynamoDB to PostgreSQL integration, gaining access to years of historical data (and negotiated a <span class="num">50%</span> reduction on fees)',
+      'Imported <span class="num">10</span> years of heterogeneous text based historical merchandising data with python + duckdb scripts, tests, and validation logic',
+      'Designed a playwright based scraper and docker service as an ETL pipeline, deployed to EC2',
+      'Built and deployed an analytics dashboard with authentication from scratch on top of the ETL pipeline',
+      'Trained and deployed a CNN for automatic image classification, blocking images before they hit the client and flagging duplicate & fraudulent images',
+      'Designed and Implemented CDC pipelines using ClickHouse and DuckDB via S3 as a data lake',
+      'Hardened deployment with rootless Podman Quadlets, Caddy, and Wireguard VPN',
+    ],
+  },
+];
+
+const priorRoles = [
+  { role: 'Data Science Instructor', meta: 'Commonwealth Bank · Sydney · Aug-Nov 2024' },
+  { role: 'Data Scientist', meta: 'Workforce Analytics · Sydney · Jun-Aug 2024' },
+  { role: 'ML Researcher', meta: 'ICNS (Neuromorphic Systems) · Sydney · 2023-2024' },
+  { role: 'Subject Coordinator', meta: 'Western Sydney University · Sydney · 2022-2024' },
+];
+
+const skills = [
+  { no: '/01', group: 'Languages', items: ['Python', 'TypeScript', 'SQL', 'Rust', 'Go', 'R', 'Solid.js', 'Vue', 'Nuxt'], core: ['Python', 'TypeScript'] },
+  { no: '/02', group: 'Data & storage', items: ['PostgreSQL', 'ClickHouse', 'DuckDB', 'DynamoDB', 'SQL Server', 'pgBouncer'], core: ['PostgreSQL', 'ClickHouse'] },
+  { no: '/03', group: 'Infra & DevOps', items: ['Kubernetes', 'Flux', 'OpenTofu', 'Docker', 'Podman', 'Quadlets', 'Traefik', 'Caddy', 'Wireguard', 'AWS', 'DigitalOcean', 'RHEL', 'S3', 'Linux'], core: ['Kubernetes', 'Flux'] },
+  { no: '/04', group: 'Data engineering', items: ['ETL pipelines', 'CDC', 'Stream processing', 'Web scraping'], core: [] },
+  { no: '/05', group: 'Machine learning', items: ['CNNs', 'Image classification', 'Model deployment', 'AWS Bedrock'], core: [] },
+];
+
+const education = [
+  { degree: 'BSc Research (Machine Learning)', org: 'Western Sydney University', year: '2020' },
+  { degree: 'BSc Data Science', org: 'Western Sydney University', year: '2020' },
+  { degree: 'BSc Mathematics', org: 'Western Sydney University', year: '2020' },
+];
+---
+
+<BaseLayout
+  title="Resume"
+  description="Ryan Greenup, full-stack software and data engineer. Resume, impact, and experience."
+>
+  <article class="cv">
+
+    <!-- ============================ IDENTITY ============================ -->
+    <header class="ident reveal">
+      <div class="ident__top">
+        <div class="ident__id">
+          <img
+            class="ident__photo"
+            src="/dp.jpeg"
+            alt="Ryan Greenup"
+            width="84"
+            height="84"
+            loading="eager"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <span class="ident__photo ident__photo--fallback" aria-hidden="true" style="display:none">RG</span>
+          <div class="ident__lines">
+            <span class="ident__kicker">curriculum vitae</span>
+            <h1 class="ident__name">Ryan Greenup</h1>
+            <p class="ident__tagline">Full-stack software &amp; data engineer</p>
+              {SHOW_OPEN_TO_WORK_BADGE && (
+                <span class="ident__status">
+                  <span class="pulse" aria-hidden="true"></span>
+                  Open to staff &amp; senior roles · Remote / Melbourne 
+                </span>
+              )}
+          </div>
+        </div>
+        <div class="ident__actions">
+          <a class="btn btn--primary" href="/resume.pdf">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"></path></svg>
+            Download PDF
+          </a>
+          <span class="ident__clock"><b>7</b> yrs shipping · last updated <b>Jun 2026</b></span>
+        </div>
+      </div>
+      <div class="ident__contact">
+        <a href="mailto:ryanxgreenup@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+          ryanxgreenup@gmail.com
+        </a>
+        <a href="tel:+61409904637">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"></path></svg>
+          0409 904 637
+        </a>
+        <a href="https://github.com/ryangreenup">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+          github.com/ryangreenup
+        </a>
+        <a href="https://www.linkedin.com/in/ryan-greenup-866685294">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          linkedin.com/in/ryan-greenup-866685294
+        </a>
+      </div>
+    </header>
+
+    <!-- ============================ RESULTS LEDGER ============================ -->
+    {SHOW_STAT_CARD_SLASH_LOG && (
+
+    <section class="ledger reveal" aria-label="Selected impact">
+      <div class="ledger__bar">
+        <span class="ledger__path">impact.log</span>
+        <span class="ledger__meta">4 outcomes · 2024 to present</span>
+      </div>
+      <ol class="ledger__rows">
+        {
+          ledger.map((r) => (
+            <li class:list={['ledger__row', `ledger__row--${r.kind}`]}>
+              <span class="ledger__gutter"><span class="ledger__no">{r.no}</span><span class="ledger__sign">{r.sign}</span></span>
+              <span class="ledger__body">
+                <span class="ledger__what">{r.what}</span>
+                <span class="ledger__transform">{r.note}</span>
+              </span>
+              <span class="ledger__out">
+                <span class="ledger__verb">{r.verb}</span>
+                <span class="ledger__figure" data-to={r.to} data-prefix={r.prefix} data-suffix={r.suffix} />
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+    )}
+
+    <!-- ============================ SUMMARY ============================ -->
+    <section class="sec reveal">
+      <div class="sec__head"><span class="sec__no">01</span><h2 class="sec__title">Summary</h2><span class="sec__rule"></span></div>
+      <p class="summary">
+        Full-stack software and data engineer who ships
+        <span class="hl">production systems with measurable financial impact</span>:
+        ETL pipelines, analytics dashboards, Kubernetes clusters, and
+        multi-brand client frontends. I care about correctness, legible
+        systems, and infrastructure other engineers are glad to inherit.
+      </p>
+    </section>
+
+    <!-- ============================ EXPERIENCE ============================ -->
+    <section class="sec reveal">
+      <div class="sec__head"><span class="sec__no">02</span><h2 class="sec__title">Experience</h2><span class="sec__rule"></span><span class="sec__count">7 roles · 2022 to now</span></div>
+      <ol class="tl">
+        {
+          experience.map((job) => (
+            <li class:list={['tl__item', job.tagKind === 'now' && 'tl__item--now']}>
+              <div class="tl__top">
+                <span class="tl__period">{job.period}</span>
+                {job.tag && (
+                  <span class:list={['tl__tag', job.tagKind === 'contract' && 'tl__tag--accent']}>{job.tag}</span>
+                )}
+              </div>
+              <h3 class="tl__role">{job.role}</h3>
+              <p class="tl__org"><b>{job.org}</b> · {job.location}</p>
+              <ul class="tl__points">
+                {job.points.map((p) => (
+                  <li set:html={p} />
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="tl__prior">
+        <div class="tl__prior-grid">
+          {
+            priorRoles.map((r) => (
+              <div class="tl__prior-row">
+                <span class="tl__prior-role">{r.role}</span>
+                <span class="tl__prior-meta">{r.meta}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SKILLS ============================ -->
+    <section class="sec reveal">
+      <div class="sec__head"><span class="sec__no">03</span><h2 class="sec__title">Technical stack</h2><span class="sec__rule"></span></div>
+      <div class="matrix">
+        {
+          skills.map((s) => (
+            <div class="mrow">
+              <div class="mrow__label"><span class="mrow__no">{s.no}</span><span class="mrow__title">{s.group}</span></div>
+              <div class="mrow__items">
+                {s.items.map((i) => (
+                  <span class:list={['chip', s.core.includes(i) && 'chip--core']}>{i}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============================ EDUCATION ============================ -->
+    <section class="sec reveal">
+      <div class="sec__head"><span class="sec__no">04</span><h2 class="sec__title">Education</h2><span class="sec__rule"></span></div>
+      <ul class="edu">
+        {
+          education.map((e) => (
+            <li class="edu__row">
+              <span class="edu__degree">{e.degree}</span>
+              <span class="edu__org">{e.org}</span>
+              <span class="edu__year">{e.year}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <footer class="cv__foot">
+      <span>ryan greenup · curriculum vitae</span>
+      <span>built &amp; deployed by hand, adapted from <MathTex tex="\\LaTeX" /></span>
+    </footer>
+  </article>
+</BaseLayout>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runCount(el: Element) {
+    const node = el as HTMLElement;
+    const to = parseFloat(node.getAttribute('data-to') || '0');
+    const prefix = node.getAttribute('data-prefix') || '';
+    const suffix = node.getAttribute('data-suffix') || '';
+    const suffixHTML = suffix ? '<span class="u">' + suffix + '</span>' : '';
+    if (reduce) {
+      node.innerHTML = prefix + to + suffixHTML;
+      return;
+    }
+    const dur = 1100;
+    const t0 = performance.now();
+    function step(t: number) {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      node.innerHTML = prefix + Math.round(eased * to) + suffixHTML;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function revealAll() {
+    const items = [...document.querySelectorAll('.reveal:not(.in)')];
+    items.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('in');
+        if (el.classList.contains('ledger')) el.querySelectorAll('.ledger__figure').forEach(runCount);
+      }, reduce ? 0 : i * 110);
+    });
+  }
+  requestAnimationFrame(() => requestAnimationFrame(revealAll));
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      document.querySelectorAll('.reveal:not(.in)').forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+          el.classList.add('in');
+          if (el.classList.contains('ledger')) el.querySelectorAll('.ledger__figure').forEach(runCount);
+        }
+      });
+    },
+    { passive: true }
+  );
+</script>
+
+<style>
+  .cv {
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+
+  /* ---- reveal-on-scroll (gated to motion-OK) ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 620ms var(--ease-reveal), transform 620ms var(--ease-reveal);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ============================ HERO / IDENTITY ============================ */
+  .ident {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    border-radius: 1rem;
+    background: var(--surface-raised);
+    padding: 2rem 2rem 1.5rem;
+  }
+  .ident::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-subtle) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(120% 90% at 88% 0%, #000 0%, transparent 62%);
+    mask-image: radial-gradient(120% 90% at 88% 0%, #000 0%, transparent 62%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .ident > * {
+    position: relative;
+  }
+  .ident__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .ident__id {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+  .ident__photo {
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    border: 1px solid var(--border-default);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--fg-primary) 12%, transparent);
+  }
+  .ident__photo--fallback {
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .ident__lines {
+    min-width: 0;
+  }
+  .ident__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+  .ident__name {
+    margin-top: 0.5rem;
+    font-size: 2.5rem;
+    line-height: 1.02;
+    color: var(--fg-primary);
+  }
+  .ident__tagline {
+    margin-top: 0.75rem;
+    font-size: 1.25rem;
+    color: var(--fg-secondary);
+    max-width: 30ch;
+  }
+  .ident__status {
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 0.75rem;
+    border-radius: 999px;
+    background: var(--status-success-soft);
+    border: 1px solid var(--status-success);
+    color: var(--status-success);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .ident__status .pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--status-success);
+  }
+  .ident__status .pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--status-success);
+    animation: ping 1.9s var(--ease-standard) infinite;
+  }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.6; }
+    80%, 100% { transform: scale(2.6); opacity: 0; }
+  }
+  .ident__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+  .ident__clock {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+    letter-spacing: 0.02em;
+    text-align: right;
+  }
+  .ident__clock b {
+    color: var(--fg-secondary);
+    font-weight: 500;
+  }
+  .ident__contact {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+  }
+  .ident__contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--fg-secondary);
+    transition: color 200ms var(--ease-standard);
+  }
+  .ident__contact a:hover {
+    color: var(--accent);
+  }
+  .ident__contact svg {
+    color: var(--fg-muted);
+  }
+  .ident__contact a:hover svg {
+    color: var(--accent);
+  }
+
+  /* ============================== RESULTS LEDGER ============================== */
+  .ledger {
+    margin-top: 1.25rem;
+    border: 1px solid var(--border-default);
+    border-radius: 0.75rem;
+    background: var(--surface-raised);
+    overflow: hidden;
+  }
+  .ledger__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-sunken);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .ledger__path {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--fg-secondary);
+  }
+  .ledger__path::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .ledger__meta {
+    color: var(--fg-muted);
+  }
+  .ledger__rows {
+    list-style: none;
+  }
+  .ledger__row {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    transition: background-color 120ms var(--ease-standard);
+  }
+  .ledger__row:first-child {
+    border-top: 0;
+  }
+  .ledger__row:hover {
+    background: var(--surface-hover);
+  }
+  .ledger__gutter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+  }
+  .ledger__sign {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .ledger__body {
+    min-width: 0;
+  }
+  .ledger__what {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--fg-primary);
+  }
+  .ledger__transform {
+    margin-top: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-tertiary);
+    line-height: 1.3;
+  }
+  .ledger__out {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    text-align: right;
+  }
+  .ledger__verb {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+  .ledger__figure {
+    font-family: var(--font-mono);
+    font-size: 1.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--fg-primary);
+  }
+  .ledger__figure :global(.u) {
+    font-size: 0.46em;
+    color: var(--fg-secondary);
+    margin-left: 2px;
+  }
+  .ledger__row--save .ledger__sign,
+  .ledger__row--save .ledger__figure {
+    color: var(--status-success);
+  }
+  .ledger__row--add .ledger__sign,
+  .ledger__row--add .ledger__figure {
+    color: var(--accent);
+  }
+  .ledger__row--ship .ledger__sign,
+  .ledger__row--ship .ledger__figure {
+    color: var(--accent);
+  }
+
+  /* ============================== SECTIONS ============================== */
+  .sec {
+    margin-top: 4rem;
+  }
+  .sec__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .sec__no {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .sec__title {
+    font-size: 1.5rem;
+    color: var(--fg-primary);
+    white-space: nowrap;
+  }
+  .sec__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+  .sec__count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .summary {
+    font-size: 1.25rem;
+    line-height: 1.75;
+    color: var(--fg-primary);
+    max-width: 68ch;
+    text-wrap: pretty;
+  }
+  .summary :global(.hl) {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ============================ EXPERIENCE TIMELINE ============================ */
+  .tl {
+    list-style: none;
+  }
+  .tl__item {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+  .tl__item:not(:last-child) {
+    padding-bottom: 2rem;
+  }
+  .tl__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 999px;
+    background: var(--surface-raised);
+    border: 3px solid var(--accent-border);
+    z-index: 1;
+  }
+  .tl__item::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 18px;
+    bottom: -2px;
+    width: 1.5px;
+    background: var(--border-default);
+  }
+  .tl__item:last-child::after {
+    display: none;
+  }
+  .tl__item--now::before {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .tl__top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .tl__period {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+    letter-spacing: 0.02em;
+  }
+  .tl__tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-on-accent);
+    background: var(--accent);
+    padding: 2px 8px;
+    border-radius: 0.25rem;
+  }
+  .tl__tag--accent {
+    background: var(--accent);
+  }
+  .tl__role {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--fg-primary);
+  }
+  .tl__org {
+    margin-top: 2px;
+    font-size: 0.9375rem;
+    color: var(--fg-secondary);
+  }
+  .tl__org b {
+    color: var(--fg-primary);
+    font-weight: 500;
+  }
+  .tl__points {
+    list-style: none;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tl__points li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--fg-secondary);
+    max-width: 68ch;
+    line-height: 1.6;
+  }
+  .tl__points li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .tl__points :global(.num) {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--fg-primary);
+    background: var(--accent-soft);
+    padding: 0 5px;
+    border-radius: 0.25rem;
+  }
+  .tl__prior {
+    margin-top: 1.5rem;
+    padding-left: 2.5rem;
+  }
+  .tl__prior-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1.5rem;
+  }
+  .tl__prior-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .tl__prior-role {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--fg-primary);
+  }
+  .tl__prior-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-tertiary);
+  }
+
+  /* ============================== SKILLS ============================== */
+  .matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .mrow {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .mrow:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .mrow__label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .mrow__no {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+  }
+  .mrow__title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-secondary);
+  }
+  .mrow__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding-inline: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border-default);
+    background: var(--surface-raised);
+    color: var(--fg-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: border-color 120ms var(--ease-standard),
+      color 120ms var(--ease-standard),
+      background-color 120ms var(--ease-standard),
+      transform 120ms var(--ease-standard);
+  }
+  .chip:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-border);
+    color: var(--accent);
+  }
+  .chip--core {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent);
+  }
+
+  /* ============================== EDUCATION / FOOTER ============================== */
+  .edu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .edu__row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .edu__row:first-child {
+    border-top: 0;
+  }
+  .edu__degree {
+    font-weight: 500;
+    color: var(--fg-primary);
+  }
+  .edu__org {
+    color: var(--fg-secondary);
+  }
+  .edu__year {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--fg-tertiary);
+    white-space: nowrap;
+  }
+  .cv__foot {
+    margin-top: 4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+  }
+
+  /* ============================== RESPONSIVE ============================== */
+  @media (max-width: 820px) {
+    .mrow {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .tl__prior-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .ident {
+      padding: 1.5rem 1.25rem;
+    }
+    .ident__actions {
+      align-items: flex-start;
+    }
+    .ident__name {
+      font-size: 1.9375rem;
+    }
+    .ledger__row {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+    .ledger__out {
+      grid-column: 2;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.5rem;
+      text-align: left;
+    }
+    .ledger__figure {
+      font-size: 1.5rem;
+    }
+  }
+</style>

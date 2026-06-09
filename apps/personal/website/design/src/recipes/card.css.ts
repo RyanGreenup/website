@@ -1,8 +1,8 @@
-import { style } from '@vanilla-extract/css'
-import { recipe } from '@vanilla-extract/recipes'
+import { style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 
-import { font, leading, radius, shadow, space, textSize } from '../tokens'
-import { vars } from '../theme.css'
+import { vars } from "../theme.css";
+import { font, leading, radius, shadow, space, textSize } from "../tokens";
 
 /**
  * Card recipes provide the generic surface container used to wrap the
@@ -42,16 +42,16 @@ export const card = recipe({
   },
   variants: {
     pad: {
-      true: { padding: space['6'] },
+      true: { padding: space["6"] },
       false: {},
     },
     flat: {
-      true: { boxShadow: 'none' },
+      true: { boxShadow: "none" },
       false: {},
     },
   },
   defaultVariants: { pad: true, flat: false },
-})
+});
 
 // ---------------------------------------------------------------------------
 // cardBody -- body slot beneath the header
@@ -68,15 +68,15 @@ export const cardBody = recipe({
   variants: {
     bleed: {
       true: {
-        marginLeft: `calc(-1 * ${space['6']})`,
-        marginRight: `calc(-1 * ${space['6']})`,
-        marginBottom: `calc(-1 * ${space['6']})`,
+        marginLeft: `calc(-1 * ${space["6"]})`,
+        marginRight: `calc(-1 * ${space["6"]})`,
+        marginBottom: `calc(-1 * ${space["6"]})`,
       },
       false: {},
     },
   },
   defaultVariants: { bleed: false },
-})
+});
 
 // ---------------------------------------------------------------------------
 // cardHead -- header row (title/sub stack + action slot)
@@ -87,11 +87,11 @@ export const cardBody = recipe({
  * action slot (badge/link) apart, gap space-4 (16px).
  */
 export const cardHead = style({
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-  gap: space['4'],
-})
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  gap: space["4"],
+});
 
 // ---------------------------------------------------------------------------
 // cardTitle -- title (h2)
@@ -105,10 +105,10 @@ export const cardTitle = style({
   margin: 0,
   fontFamily: font.sans,
   fontSize: textSize.md,
-  fontWeight: '600',
+  fontWeight: "600",
   lineHeight: leading.snug,
   color: vars.roles.fg.base,
-})
+});
 
 // ---------------------------------------------------------------------------
 // cardSub -- subtitle (p)
@@ -124,10 +124,10 @@ export const cardTitle = style({
  */
 export const cardSub = style({
   margin: 0,
-  marginTop: '2px', // hi-fi spec -- off-grid, no 2px token; literal preserves design
+  marginTop: "2px", // hi-fi spec -- off-grid, no 2px token; literal preserves design
   fontFamily: font.sans,
   fontSize: textSize.sm,
-  fontWeight: '400',
+  fontWeight: "400",
   lineHeight: leading.snug,
   color: vars.roles.fg.muted,
-})
+});

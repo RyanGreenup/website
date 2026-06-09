@@ -1,5 +1,5 @@
 /**
- * UniRemit semantic colour roles (theme-dependent).
+ * Semantic colour roles (theme-dependent).
  *
  * Surface, text, brand and accent roles. These mirror the CSS custom
  * properties defined in `global.css` (`--surface-*`, `--fg-*`, `--accent*`,

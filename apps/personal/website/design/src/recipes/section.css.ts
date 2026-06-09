@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css'
+import { style } from "@vanilla-extract/css";
 
-import { font, leading, space, textSize } from '../tokens'
-import { vars } from '../theme.css'
+import { vars } from "../theme.css";
+import { font, leading, space, textSize } from "../tokens";
 
 /**
  * Section primitives for the editorial pages. `section` separates a block from
@@ -11,34 +11,34 @@ import { vars } from '../theme.css'
  * pieces. Colours come from the typed contract; spacing/type from static tokens.
  */
 export const section = style({
-  marginTop: space['24'],
-})
+  marginTop: space["24"],
+});
 
 export const sectionHead = style({
-  display: 'flex',
-  alignItems: 'baseline',
-  justifyContent: 'space-between',
-  gap: space['4'],
-  marginBottom: space['8'],
-  paddingBottom: space['4'],
+  display: "flex",
+  alignItems: "baseline",
+  justifyContent: "space-between",
+  gap: space["4"],
+  marginBottom: space["8"],
+  paddingBottom: space["4"],
   borderBottom: `1px solid ${vars.roles.border.subtle}`,
-})
+});
 
 export const sectionTitle = style({
   margin: 0,
   fontFamily: font.sans,
-  fontSize: textSize['2xl'],
-  fontWeight: '600',
+  fontSize: textSize["2xl"],
+  fontWeight: "600",
   lineHeight: leading.snug,
   color: vars.roles.fg.base,
-})
+});
 
 export const sectionMore = style({
   fontSize: textSize.sm,
-  fontWeight: '500',
+  fontWeight: "500",
   color: vars.roles.brand.primary,
-  whiteSpace: 'nowrap',
+  whiteSpace: "nowrap",
   selectors: {
-    '&:hover': { color: vars.roles.brand.primaryHover },
+    "&:hover": { color: vars.roles.brand.primaryHover },
   },
-})
+});

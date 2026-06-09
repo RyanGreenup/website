@@ -1,0 +1,2 @@
+check:
+    cd ../../.. && pnpm turbo run check --filter='./apps/personal/website/*' --only

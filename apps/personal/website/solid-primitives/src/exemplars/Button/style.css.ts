@@ -2,28 +2,41 @@ import { style } from "@vanilla-extract/css";
 
 import { tokens, vars } from "../../styles/theme.css";
 
-const colors = vars.color.ni;
+const colors = vars.color.pop;
 
-// Light themed styling layered over the behavioural Button primitive.
+/**
+ * Flat fluoro fill, heavy outline, hard offset shadow.
+ * Hover grows the shadow to lift it; click shrinks it to press it down.
+ */
 export const button = style({
   backgroundColor: tokens.ui.primary,
-  border: "none",
-  borderRadius: tokens.radius.card,
-  color: colors.white,
+  border: `2px solid ${colors.ink}`,
+  borderRadius: "6px",
+  boxShadow: `4px 4px 0 ${colors.ink}`,
+  color: colors.ink,
+  cursor: "pointer",
   fontFamily: tokens.font.outfit,
   fontSize: tokens.text.base,
-  fontWeight: 600,
-  padding: "0.5rem 1rem",
+  fontWeight: 700,
+  padding: "0.5rem 1.1rem",
   selectors: {
-    "&:active": {
-      backgroundColor: colors.darkBlue,
+    "&:active:not(:disabled)": {
+      backgroundColor: colors.grape,
+      boxShadow: `0 0 0 ${colors.ink}`,
+      color: colors.cloud,
+      transform: "translate(4px, 4px)",
     },
     "&:disabled": {
-      backgroundColor: colors.muted,
+      backgroundColor: colors.ash,
+      boxShadow: "none",
+      color: colors.paperShade,
+      cursor: "not-allowed",
     },
     "&:hover:not(:disabled)": {
-      backgroundColor: colors.midBlue,
+      backgroundColor: colors.tangerine,
+      boxShadow: `6px 6px 0 ${colors.ink}`,
+      transform: "translate(-2px, -2px)",
     },
   },
-  transition: "background-color 150ms ease",
+  transition: "transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease",
 });

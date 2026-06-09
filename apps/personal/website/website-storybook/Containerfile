@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# Build context is the monorepo root (apps/ni-storybook is a pnpm workspace
+# Build context is the monorepo root (apps/website-storybook is a pnpm workspace
 # member). Produces a tiny static image: the built Storybook bundle served by
 # busybox httpd.
 
@@ -31,15 +31,15 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
 # Bring in the pruned source and build through turbo. `^build` first builds the
 # component library closure (/storybook).
 COPY --from=prepare /repo/out/full/ .
-RUN --mount=type=cache,id=turbo-ni-storybook-cache,target=/repo/.turbo/cache \
+RUN --mount=type=cache,id=turbo-website-storybook-cache,target=/repo/.turbo/cache \
   turbo run build --filter=@rs/ryan-personal-website-storybook
 
 # --- production: static files served by busybox httpd ---
 # busybox httpd needs no writable directories, so the Deployment can run with
 # readOnlyRootFilesystem: true and a non-root user (UID 10001) with no volumes.
 FROM busybox:1.37-musl AS production
-LABEL dev.k8s.image="weareimpress-ni-storybook"
-COPY --from=build /repo/apps/ni-storybook/storybook-static /www
+LABEL dev.k8s.image="website-storybook"
+COPY --from=build /repo/apps/website-storybook/storybook-static /www
 EXPOSE 8080
 USER 10001
 CMD ["httpd", "-f", "-v", "-p", "8080", "-h", "/www"]

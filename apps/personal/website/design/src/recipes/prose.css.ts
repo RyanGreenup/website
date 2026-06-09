@@ -1,7 +1,7 @@
-import { globalStyle, style } from '@vanilla-extract/css'
+import { globalStyle, style } from "@vanilla-extract/css";
 
-import { font, layout, leading, radius, space, textSize } from '../tokens'
-import { vars } from '../theme.css'
+import { vars } from "../theme.css";
+import { font, layout, leading, radius, space, textSize } from "../tokens";
 
 /**
  * Prose: long-form reading typography for rendered Markdown (blog posts). The
@@ -17,102 +17,116 @@ export const prose = style({
   color: vars.roles.fg.base,
   fontSize: textSize.lg,
   lineHeight: leading.relaxed,
-})
+});
 
 globalStyle(
   `${prose} p, ${prose} ul, ${prose} ol, ${prose} blockquote, ${prose} pre, ${prose} table`,
-  { marginBlock: space['5'] },
-)
+  { marginBlock: space["5"] },
+);
 
 globalStyle(`${prose} h2`, {
-  fontSize: textSize['2xl'],
-  fontWeight: '600',
-  marginBlock: `${space['12']} ${space['4']}`,
+  fontSize: textSize["2xl"],
+  fontWeight: "600",
+  marginBlock: `${space["12"]} ${space["4"]}`,
   color: vars.roles.fg.base,
-})
+});
 globalStyle(`${prose} h3`, {
   fontSize: textSize.xl,
-  fontWeight: '600',
-  marginBlock: `${space['8']} ${space['3']}`,
+  fontWeight: "600",
+  marginBlock: `${space["8"]} ${space["3"]}`,
   color: vars.roles.fg.base,
-})
+});
 
 globalStyle(`${prose} a`, {
   color: vars.roles.brand.primary,
-  textDecoration: 'underline',
-  textUnderlineOffset: '2px',
+  textDecoration: "underline",
+  textUnderlineOffset: "2px",
   textDecorationColor: vars.roles.brand.primaryBorder,
-  transition: 'text-decoration-color var(--duration-base) var(--ease-standard)',
-})
+  transition: "text-decoration-color var(--duration-base) var(--ease-standard)",
+});
 globalStyle(`${prose} a:hover`, {
   textDecorationColor: vars.roles.brand.primary,
-})
+});
 
 globalStyle(`${prose} strong`, {
-  fontWeight: '600',
+  fontWeight: "600",
   color: vars.roles.fg.base,
-})
+});
 
 globalStyle(`${prose} ul, ${prose} ol`, {
-  paddingInlineStart: space['6'],
-})
-globalStyle(`${prose} li`, { marginBlock: space['2'] })
-globalStyle(`${prose} li::marker`, { color: vars.roles.fg.faint })
+  paddingInlineStart: space["6"],
+});
+globalStyle(`${prose} li`, { marginBlock: space["2"] });
+globalStyle(`${prose} li::marker`, { color: vars.roles.fg.faint });
 
 globalStyle(`${prose} blockquote`, {
-  paddingInlineStart: space['5'],
+  paddingInlineStart: space["5"],
   borderInlineStart: `3px solid ${vars.roles.accent}`,
   color: vars.roles.fg.muted,
-  fontStyle: 'italic',
-})
+  fontStyle: "italic",
+});
 
 globalStyle(`${prose} code`, {
   fontFamily: font.mono,
-  fontSize: '0.86em',
-  padding: '0.12em 0.4em',
+  fontSize: "0.86em",
+  padding: "0.12em 0.4em",
   borderRadius: radius.sm,
   background: vars.roles.bg.sunken,
   border: `1px solid ${vars.roles.border.subtle}`,
   color: vars.roles.fg.base,
-})
+});
 globalStyle(`${prose} pre`, {
-  padding: space['5'],
+  padding: space["5"],
   borderRadius: radius.lg,
   background: vars.roles.bg.sunken,
   border: `1px solid ${vars.roles.border.base}`,
-  overflowX: 'auto',
+  overflowX: "auto",
   fontSize: textSize.sm,
   lineHeight: leading.snug,
-})
+});
 globalStyle(`${prose} pre code`, {
   padding: 0,
   border: 0,
-  background: 'transparent',
-})
+  background: "transparent",
+});
+
+globalStyle(`${prose} .shiki`, {
+  background: `${vars.roles.bg.sunken} !important`,
+});
+globalStyle(`${prose} .shiki span`, {
+  background: "transparent !important",
+});
+globalStyle(`${prose} .shiki, ${prose} .shiki span`, {
+  "@media": {
+    "(prefers-color-scheme: dark)": {
+      color: "var(--shiki-dark) !important",
+    },
+  },
+});
 
 globalStyle(`${prose} hr`, {
-  marginBlock: space['10'],
+  marginBlock: space["10"],
   border: 0,
   borderTop: `1px solid ${vars.roles.border.base}`,
-})
+});
 
 globalStyle(`${prose} img`, {
   borderRadius: radius.lg,
   border: `1px solid ${vars.roles.border.base}`,
-})
+});
 
 globalStyle(`${prose} table`, {
-  width: '100%',
-  borderCollapse: 'collapse',
+  width: "100%",
+  borderCollapse: "collapse",
   fontSize: textSize.md,
-})
+});
 globalStyle(`${prose} th, ${prose} td`, {
-  textAlign: 'left',
-  padding: `${space['3']} ${space['4']}`,
+  textAlign: "left",
+  padding: `${space["3"]} ${space["4"]}`,
   borderBottom: `1px solid ${vars.roles.border.subtle}`,
-})
+});
 globalStyle(`${prose} th`, {
   color: vars.roles.fg.subtle,
-  fontWeight: '600',
+  fontWeight: "600",
   fontSize: textSize.sm,
-})
+});

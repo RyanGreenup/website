@@ -12,22 +12,23 @@
  */
 
 // ---- Layout primitives ----------------------------------------------------
-export { autoGrid } from './auto-grid.css'
-export { flow, spacer } from './layout.css'
+export { autoGrid } from "./auto-grid.css";
+export { flow, spacer } from "./layout.css";
 
 // ---- Generic surface / controls -------------------------------------------
-export { badge } from './badge.css'
-export { button, buttonSpinner } from './button.css'
-export { card, cardBody, cardHead, cardSub, cardTitle } from './card.css'
-export { fieldInput, fieldRoot, fieldLabel, fieldHint, fieldError } from './field.css'
+export { badge } from "./badge.css";
+export { comingSoonBadge } from "./coming-soon-badge.css";
+export { button, buttonSpinner } from "./button.css";
+export { card, cardBody, cardHead, cardSub, cardTitle } from "./card.css";
+export { fieldInput, fieldRoot, fieldLabel, fieldHint, fieldError } from "./field.css";
 
 // ---- Brand ----------------------------------------------------------------
-export * as brandLogo from './brand-logo.css'
+export * as brandLogo from "./brand-logo.css";
 
 // ---- Editorial page furniture ---------------------------------------------
-export { kicker } from './kicker.css'
-export { section, sectionHead, sectionTitle, sectionMore } from './section.css'
-export { pageHead, pageHeadTitle, pageHeadLede } from './page-head.css'
+export { kicker } from "./kicker.css";
+export { section, sectionHead, sectionTitle, sectionMore } from "./section.css";
+export { pageHead, pageHeadTitle, pageHeadLede } from "./page-head.css";
 
 // ---- Hero (default column + optional spec-sheet rail) ---------------------
 export {
@@ -40,7 +41,7 @@ export {
   specRow,
   specKey,
   specVal,
-} from './hero.css'
+} from "./hero.css";
 
 // ---- Cards ----------------------------------------------------------------
 export {
@@ -52,7 +53,7 @@ export {
   projectCardTech,
   projectCardLinks,
   projectCardLink,
-} from './project-card.css'
+} from "./project-card.css";
 export {
   postCard,
   postCardLink,
@@ -61,10 +62,10 @@ export {
   postCardDesc,
   postCardMore,
   postCardTags,
-} from './post-card.css'
+} from "./post-card.css";
 
 // ---- Tag / chip -----------------------------------------------------------
-export { chip } from './chip.css'
+export { chip } from "./chip.css";
 
 // ---- Shell: header + footer -----------------------------------------------
 export {
@@ -79,11 +80,15 @@ export {
   headerActions,
   themeToggle,
   navToggle,
+  navOverlay,
   navBackdrop,
   navSheet,
+  navSheetHead,
+  navSheetTitle,
+  navSheetClose,
   navIndex,
   navSheetLink,
-} from './site-header.css'
+} from "./site-header.css";
 export {
   siteFooter,
   footerInner,
@@ -93,10 +98,10 @@ export {
   footerLinks,
   footerLink,
   footerCopy,
-} from './site-footer.css'
+} from "./site-footer.css";
 
 // ---- Long-form prose ------------------------------------------------------
-export { prose } from './prose.css'
+export { prose } from "./prose.css";
 
 // ---- Motion ---------------------------------------------------------------
-export { reveal, pushRight } from './motion.css'
+export { reveal, pushRight } from "./motion.css";

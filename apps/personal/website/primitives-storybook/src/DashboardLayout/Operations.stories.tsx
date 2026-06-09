@@ -103,9 +103,9 @@ type Story = StoryObj;
 
 const Brand = () => (
   <div class={brand}>
-    <span class={mark}>UR</span>
+    <span class={mark}>AC</span>
     <span class={brandText}>
-      <span class={brandName}>UniRemit</span>
+      <span class={brandName}>Acme</span>
       <span class={brandMeta}>Operations</span>
     </span>
   </div>

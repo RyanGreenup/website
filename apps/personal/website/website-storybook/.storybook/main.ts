@@ -7,11 +7,12 @@ import type { StorybookConfig } from "storybook-solidjs-vite";
 const storybookDir = dirname(fileURLToPath(import.meta.url));
 const appSrc = `${storybookDir}/../src`;
 const componentsSrc = `${storybookDir}/../../website-components/src`;
+const webAppComponentsSrc = `${storybookDir}/../../web-app/src/components`;
 
 // Workspace-package source dirs whose components should get docgen prop tables.
 // Add each component-library package's src here (also add it to tsconfig.json's
 // `include` so the files land in the TypeScript program docgen builds from).
-const docgenSourceDirs = [appSrc, componentsSrc, baseStoriesDir];
+const docgenSourceDirs = [appSrc, componentsSrc, webAppComponentsSrc, baseStoriesDir];
 
 const config: StorybookConfig = {
   ...baseConfig,

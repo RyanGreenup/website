@@ -38,7 +38,7 @@ RUN --mount=type=cache,id=turbo-primitives-storybook-cache,target=/repo/.turbo/c
 # busybox httpd needs no writable directories, so the Deployment can run with
 # readOnlyRootFilesystem: true and a non-root user (UID 10001) with no volumes.
 FROM busybox:1.37-musl AS production
-LABEL dev.k8s.image="weareimpress-primitives-storybook"
+LABEL dev.k8s.image="primitives-storybook"
 COPY --from=build /repo/apps/primitives-storybook/storybook-static /www
 EXPOSE 8080
 USER 10001

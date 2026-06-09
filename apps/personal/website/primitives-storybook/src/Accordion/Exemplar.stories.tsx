@@ -28,7 +28,7 @@ const meta = {
     defaultChecked: { control: "boolean" },
   },
   args: {
-    title: "What is National Intermodal?",
+    title: "What is a headless component?",
     variant: "default",
     size: "md",
     defaultChecked: false,

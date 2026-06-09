@@ -1,15 +1,14 @@
-import { recipe } from '@vanilla-extract/recipes'
+import { autoGridConfig } from "@rs/layout/recipes";
+import { recipe } from "@vanilla-extract/recipes";
 
-import { autoGridConfig } from '@rs/layout/recipes'
-
-import { space } from '../tokens'
+import { space } from "../tokens";
 
 /** Intrinsic minmax wrap thresholds (geometry, not theme tokens). */
-const autoGridMins = { xs: '8rem', sm: '12rem', md: '16rem', lg: '20rem', xl: '24rem' } as const
+const autoGridMins = { xs: "8rem", sm: "12rem", md: "16rem", lg: "20rem", xl: "24rem" } as const;
 
 /**
- * The breakpoint-free auto-fit grid, bound to uniremit tokens. The `min`
+ * The breakpoint-free auto-fit grid, bound to the design tokens. The `min`
  * thresholds are intrinsic layout geometry; `gap` reuses the shared scale.
  * Mechanism lives in @rs/layout.
  */
-export const autoGrid = recipe(autoGridConfig(space, autoGridMins))
+export const autoGrid = recipe(autoGridConfig(space, autoGridMins));

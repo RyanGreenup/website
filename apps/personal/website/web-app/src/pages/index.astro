@@ -1,32 +1,126 @@
 ---
-import { Button } from "@rs/ryan-personal-website-components";
-
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import PostCard from "../components/PostCard.astro";
+import { featuredProjects } from "../data/projects";
 
-// Clean starting shell: the layout wires in the design system (tokens, theme,
-// fonts) and this page renders a website-components island to demonstrate the
-// full source-consumption + hydration path. Replace with real content.
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
 ---
 
-<BaseLayout
-  title="Ryan Greenup"
-  description="Personal website of Ryan Greenup."
->
-  <main class="hero">
-    <h1>Ryan Greenup</h1>
-    <p>Personal website. This is a fresh scaffold wired to the design system.</p>
-    <Button client:load variant="primary">Get in touch</Button>
-  </main>
+<BaseLayout title="Ryan Greenup">
+  <section class="hero">
+    <p class="kicker">Software Engineer &middot; Data &amp; Infrastructure</p>
+    <h1 class="hero__title">
+Mostly backend. Occasionally opinions.
+    </h1>
+    <p class="hero__lede">
+      A, one day maybe, working notebook on things that interest me. Mostly
+      data, software and getting things right, time permitting mathematics and statistics too.
+
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="/resume">View resume</a>
+      <a class="btn btn--secondary" href="/projects">See projects</a>
+      <a class="btn btn--ghost" href="/contact">Get in touch &rarr;</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Selected work</h2>
+      <a class="section__more" href="/projects">All projects &rarr;</a>
+    </div>
+    <div class="work-grid">
+      {
+        featuredProjects.map((p) => (
+          <ProjectCard
+            title={p.title}
+            description={p.description}
+            tech={p.tech}
+            github={p.github}
+            live={p.live}
+            note={p.note}
+            comingSoon={p.comingSoon}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Recent writing</h2>
+      <a class="section__more" href="/blog">All posts &rarr;</a>
+    </div>
+    <div class="post-list">
+      {
+        posts.map((post) => (
+          <PostCard
+            href={`/blog/${post.id}`}
+            title={post.data.title}
+            date={post.data.date}
+            description={post.data.description}
+            tags={post.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
   .hero {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 6rem 1.5rem;
+    max-width: 52rem;
+    padding-block: var(--spacing-8) var(--spacing-4);
+  }
+  .hero__title {
+    margin-top: var(--spacing-5);
+    font-size: var(--text-5xl);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-tight);
+    color: var(--fg-primary);
+  }
+  .hero__lede {
+    margin-top: var(--spacing-6);
+    max-width: var(--measure);
+    font-size: var(--text-xl);
+    line-height: var(--leading-normal);
+    color: var(--fg-secondary);
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-8);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-5);
+  }
+  .post-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
+  }
+  .post-list > :global(.post-card:first-child) {
+    padding-top: 0;
+  }
+
+  @media (max-width: 900px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero__title {
+      font-size: var(--text-4xl);
+    }
+    .hero__lede {
+      font-size: var(--text-lg);
+    }
   }
 </style>

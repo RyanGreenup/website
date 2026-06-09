@@ -1,0 +1,81 @@
+---
+import TagChip from "./TagChip.astro";
+
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  description: string;
+  tags?: string[];
+}
+const { href, title, date, description, tags = [] } = Astro.props;
+
+const dateLabel = date.toLocaleDateString("en-AU", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+const iso = date.toISOString().slice(0, 10);
+---
+
+<article class="post-card">
+  <a class="post-card__link" href={href}>
+    <time class="post-card__date" datetime={iso}>{dateLabel}</time>
+    <h3 class="post-card__title">{title}</h3>
+    <p class="post-card__desc">{description}</p>
+    <span class="post-card__more">Read post &rarr;</span>
+  </a>
+  {
+    tags.length > 0 && (
+      <div class="post-card__tags">
+        {tags.map((t) => (
+          <TagChip label={t} mono />
+        ))}
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding-block: var(--spacing-6);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .post-card__link {
+    display: grid;
+    gap: var(--spacing-2);
+    text-decoration: none;
+  }
+  .post-card__date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-tertiary);
+    letter-spacing: var(--tracking-wide);
+  }
+  .post-card__title {
+    font-size: var(--text-xl);
+    color: var(--fg-primary);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+  .post-card__link:hover .post-card__title {
+    color: var(--accent);
+  }
+  .post-card__desc {
+    font-size: var(--text-md);
+    color: var(--fg-secondary);
+    max-width: var(--measure);
+  }
+  .post-card__more {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--accent);
+  }
+  .post-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+  }
+</style>

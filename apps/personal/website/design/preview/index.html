@@ -22,10 +22,11 @@
          Theme-independent: fonts, type scale, spacing, radii, motion.
          ==================================================================== */
       :root {
-        --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI',
-          Roboto, Helvetica, Arial, sans-serif;
-        --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'JetBrains Mono',
-          Menlo, Consolas, monospace;
+        --font-sans:
+          "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+        --font-mono:
+          "IBM Plex Mono", ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
         --text-xs: 0.75rem;
         --text-sm: 0.8125rem;
@@ -139,7 +140,7 @@
       }
 
       .dark-vars,
-      :root[data-theme='dark'] {
+      :root[data-theme="dark"] {
         --roles-bg-app: #0e1217;
         --roles-bg-surface: #161b22;
         --roles-bg-raised: #1c232c;
@@ -190,7 +191,7 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        :root:not([data-theme='light']) {
+        :root:not([data-theme="light"]) {
           --roles-bg-app: #0e1217;
           --roles-bg-surface: #161b22;
           --roles-bg-raised: #1c232c;
@@ -303,7 +304,8 @@
         font-weight: var(--weight-semibold);
         letter-spacing: var(--tracking-wide);
         cursor: pointer;
-        transition: background-color var(--duration-base) var(--ease-standard),
+        transition:
+          background-color var(--duration-base) var(--ease-standard),
           border-color var(--duration-base) var(--ease-standard),
           color var(--duration-base) var(--ease-standard);
       }
@@ -493,13 +495,13 @@
         background: var(--roles-bg-surface);
         border: 1px solid var(--roles-border-base);
         border-radius: var(--radius-xl);
-        transition: border-color var(--duration-base) var(--ease-standard),
+        transition:
+          border-color var(--duration-base) var(--ease-standard),
           box-shadow var(--duration-base) var(--ease-standard);
       }
       .project-card:hover {
         border-color: var(--roles-brand-primary-border);
-        box-shadow: 0 1px 2px
-          color-mix(in srgb, var(--roles-fg-base) 6%, transparent);
+        box-shadow: 0 1px 2px color-mix(in srgb, var(--roles-fg-base) 6%, transparent);
       }
       .project-card__head {
         display: flex;
@@ -545,7 +547,8 @@
         font-size: var(--text-sm);
         font-weight: var(--weight-medium);
         color: var(--roles-fg-muted);
-        transition: color var(--duration-base) var(--ease-standard),
+        transition:
+          color var(--duration-base) var(--ease-standard),
           background-color var(--duration-base) var(--ease-standard);
       }
       .project-card__link:hover {
@@ -664,14 +667,15 @@
         font-size: var(--text-sm);
         font-weight: var(--weight-medium);
         color: var(--roles-fg-muted);
-        transition: color var(--duration-base) var(--ease-standard),
+        transition:
+          color var(--duration-base) var(--ease-standard),
           background-color var(--duration-base) var(--ease-standard);
       }
       .nav__link:hover {
         color: var(--roles-fg-base);
         background: var(--roles-bg-hover);
       }
-      .nav__link[aria-current='page'] {
+      .nav__link[aria-current="page"] {
         color: var(--roles-brand-primary);
         background: var(--roles-brand-primary-subtle);
       }
@@ -1008,8 +1012,7 @@
         padding: var(--spacing-5);
         background: var(--roles-bg-surface);
         border-left: 1px solid var(--roles-border-base);
-        box-shadow: -24px 0 60px
-          color-mix(in srgb, var(--roles-fg-base) 22%, transparent);
+        box-shadow: -24px 0 60px color-mix(in srgb, var(--roles-fg-base) 22%, transparent);
         transform: translateX(100%);
         transition: transform var(--duration-base) var(--ease-reveal);
       }
@@ -1093,9 +1096,8 @@
     </header>
 
     <p class="preview-note">
-      Static preview of @rs/ryan-personal-website-design. Same lifted role/status
-      contract, different (editorial portfolio) design. Use the toggle to verify
-      dark mode.
+      Static preview of @rs/ryan-personal-website-design. Same lifted role/status contract,
+      different (editorial portfolio) design. Use the toggle to verify dark mode.
     </p>
 
     <main class="rail">
@@ -1105,14 +1107,12 @@
           Senior Software Engineer / Systems &amp; Web
         </p>
         <h1 class="hero__title reveal" style="--reveal-delay: 90ms">
-          I build the unglamorous infrastructure that the glamorous things run
-          on.
+          I build the unglamorous infrastructure that the glamorous things run on.
         </h1>
         <p class="hero__lede reveal" style="--reveal-delay: 180ms">
-          Fifteen years across payments, developer tooling, and data platforms.
-          I care about correctness, legible systems, and shipping software that
-          other engineers are glad to inherit. Currently open to staff and
-          senior roles, remote or Melbourne.
+          Fifteen years across payments, developer tooling, and data platforms. I care about
+          correctness, legible systems, and shipping software that other engineers are glad to
+          inherit. Currently open to staff and senior roles, remote or Melbourne.
         </p>
         <div class="hero__cta reveal" style="--reveal-delay: 270ms">
           <a class="btn btn--primary" href="#">View resume</a>
@@ -1134,9 +1134,8 @@
               <span class="project-card__note">Production</span>
             </header>
             <p class="project-card__desc">
-              A double-entry accounting engine with an event-sourced core.
-              Handles multi-currency reconciliation and replays a full audit
-              trail from an append-only log.
+              A double-entry accounting engine with an event-sourced core. Handles multi-currency
+              reconciliation and replays a full audit trail from an append-only log.
             </p>
             <div class="project-card__tech">
               <span class="chip chip--mono">TypeScript</span>
@@ -1156,9 +1155,8 @@
               <span class="project-card__note">Open source</span>
             </header>
             <p class="project-card__desc">
-              An incremental static-site framework that compiles content
-              collections to zero-JS HTML and hydrates only the islands you
-              mark. Powers this site.
+              An incremental static-site framework that compiles content collections to zero-JS HTML
+              and hydrates only the islands you mark. Powers this site.
             </p>
             <div class="project-card__tech">
               <span class="chip chip--mono">Node</span>
@@ -1176,9 +1174,8 @@
               <span class="project-card__note">Production</span>
             </header>
             <p class="project-card__desc">
-              Observability for slow database queries: a sampling profiler that
-              attributes wall-clock time to query plans and flags regressions
-              across deploys.
+              Observability for slow database queries: a sampling profiler that attributes
+              wall-clock time to query plans and flags regressions across deploys.
             </p>
             <div class="project-card__tech">
               <span class="chip chip--mono">Go</span>
@@ -1203,12 +1200,10 @@
           <article class="post-card">
             <a class="post-card__link" href="#">
               <time class="post-card__date">14 Mar 2026</time>
-              <h3 class="post-card__title">
-                Migration-ready CSS: one contract, many designs
-              </h3>
+              <h3 class="post-card__title">Migration-ready CSS: one contract, many designs</h3>
               <p class="post-card__desc">
-                How we structured a semantic colour contract so a future move to
-                vanilla-extract is a one-line import, not a refactor.
+                How we structured a semantic colour contract so a future move to vanilla-extract is
+                a one-line import, not a refactor.
               </p>
               <span class="post-card__more">Read post -&gt;</span>
             </a>
@@ -1226,9 +1221,8 @@
                 Islands without the guilt: shipping less JavaScript on purpose
               </h3>
               <p class="post-card__desc">
-                A field report on building a content site where the only
-                client-side script is a theme toggle, and why that constraint
-                made everything else simpler.
+                A field report on building a content site where the only client-side script is a
+                theme toggle, and why that constraint made everything else simpler.
               </p>
               <span class="post-card__more">Read post -&gt;</span>
             </a>
@@ -1246,9 +1240,9 @@
         <p class="ds-kicker">Design system</p>
         <h2 class="ds-h">The contract, made visible</h2>
         <p class="ds-lede">
-          The colour roles and status families are lifted unchanged from the
-          shared contract. The static tokens (type scale, spacing, motion) and
-          the recipe layer are the editorial portfolio design built on top.
+          The colour roles and status families are lifted unchanged from the shared contract. The
+          static tokens (type scale, spacing, motion) and the recipe layer are the editorial
+          portfolio design built on top.
         </p>
 
         <div class="ds-grid">
@@ -1260,30 +1254,21 @@
             <div class="frame__body">
               <div class="swatches">
                 <div class="swatch">
-                  <div
-                    class="swatch__chip"
-                    style="background: var(--roles-brand-primary)"
-                  ></div>
+                  <div class="swatch__chip" style="background: var(--roles-brand-primary)"></div>
                   <div class="swatch__meta">
                     <div class="swatch__name">brand.primary</div>
                     actions
                   </div>
                 </div>
                 <div class="swatch">
-                  <div
-                    class="swatch__chip"
-                    style="background: var(--roles-accent)"
-                  ></div>
+                  <div class="swatch__chip" style="background: var(--roles-accent)"></div>
                   <div class="swatch__meta">
                     <div class="swatch__name">accent</div>
                     petrol teal
                   </div>
                 </div>
                 <div class="swatch">
-                  <div
-                    class="swatch__chip"
-                    style="background: var(--roles-fg-base)"
-                  ></div>
+                  <div class="swatch__chip" style="background: var(--roles-fg-base)"></div>
                   <div class="swatch__meta">
                     <div class="swatch__name">fg.base</div>
                     body ink
@@ -1303,20 +1288,14 @@
                   </div>
                 </div>
                 <div class="swatch">
-                  <div
-                    class="swatch__chip"
-                    style="background: var(--status-success-base)"
-                  ></div>
+                  <div class="swatch__chip" style="background: var(--status-success-base)"></div>
                   <div class="swatch__meta">
                     <div class="swatch__name">success</div>
                     status
                   </div>
                 </div>
                 <div class="swatch">
-                  <div
-                    class="swatch__chip"
-                    style="background: var(--status-danger-base)"
-                  ></div>
+                  <div class="swatch__chip" style="background: var(--status-danger-base)"></div>
                   <div class="swatch__meta">
                     <div class="swatch__name">danger</div>
                     status
@@ -1328,9 +1307,7 @@
 
           <!-- type scale -->
           <div class="frame">
-            <div class="frame__label">
-              Type scale <span class="frame__tag">IBM Plex</span>
-            </div>
+            <div class="frame__label">Type scale <span class="frame__tag">IBM Plex</span></div>
             <div class="frame__body">
               <div class="type-row">
                 <span class="type-row__tag">5xl</span>
@@ -1348,10 +1325,7 @@
                 <span class="type-row__tag">3xl</span>
                 <span
                   class="type-row__sample"
-                  style="
-                    font-size: var(--text-3xl);
-                    font-weight: var(--weight-semibold);
-                  "
+                  style="font-size: var(--text-3xl); font-weight: var(--weight-semibold)"
                   >Section heading</span
                 >
               </div>
@@ -1386,9 +1360,7 @@
 
           <!-- buttons + chips -->
           <div class="frame">
-            <div class="frame__label">
-              Controls <span class="frame__tag">button, chip</span>
-            </div>
+            <div class="frame__label">Controls <span class="frame__tag">button, chip</span></div>
             <div class="frame__body">
               <div class="row">
                 <button class="btn btn--primary">Primary</button>
@@ -1411,9 +1383,8 @@
         <p class="ds-kicker">Explorations</p>
         <h2 class="ds-h">Faithful, plus a few bold options</h2>
         <p class="ds-lede">
-          Gap-design passes that stay inside the editorial / IBM Plex / blue
-          slate aesthetic. Each is built on the same contract, so any of them can
-          ship without touching tokens.
+          Gap-design passes that stay inside the editorial / IBM Plex / blue slate aesthetic. Each
+          is built on the same contract, so any of them can ship without touching tokens.
         </p>
 
         <div class="ds-grid">
@@ -1431,12 +1402,10 @@
                     class="hero__title"
                     style="font-size: var(--text-4xl); margin-top: var(--spacing-4)"
                   >
-                    I build the unglamorous infrastructure that the glamorous
-                    things run on.
+                    I build the unglamorous infrastructure that the glamorous things run on.
                   </h1>
                   <p class="hero__lede" style="font-size: var(--text-lg)">
-                    Fifteen years across payments, developer tooling, and data
-                    platforms.
+                    Fifteen years across payments, developer tooling, and data platforms.
                   </p>
                 </div>
                 <aside class="spec-sheet" aria-label="At a glance">
@@ -1458,9 +1427,7 @@
                   </div>
                   <div class="spec-row">
                     <span class="spec-key">status</span>
-                    <span
-                      class="spec-val"
-                      style="color: var(--roles-accent-strong)"
+                    <span class="spec-val" style="color: var(--roles-accent-strong)"
                       >open to senior roles</span
                     >
                   </div>
@@ -1468,17 +1435,14 @@
               </div>
             </div>
             <p class="frame__caption">
-              An asymmetric column beside a mono datasheet rail. Surfaces the
-              hard credentials a recruiter scans for, without decoration.
-              Collapses to one column on narrow viewports.
+              An asymmetric column beside a mono datasheet rail. Surfaces the hard credentials a
+              recruiter scans for, without decoration. Collapses to one column on narrow viewports.
             </p>
           </div>
 
           <!-- brand marks -->
           <div class="frame">
-            <div class="frame__label">
-              Brand marks <span class="frame__tag">brandLogo</span>
-            </div>
+            <div class="frame__label">Brand marks <span class="frame__tag">brandLogo</span></div>
             <div class="frame__body">
               <div class="marks">
                 <div class="mark-cell">
@@ -1495,28 +1459,21 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       />
-                      <circle
-                        cx="22.6"
-                        cy="26.4"
-                        r="2.4"
-                        fill="var(--roles-accent)"
-                      />
+                      <circle cx="22.6" cy="26.4" r="2.4" fill="var(--roles-accent)" />
                     </svg>
                   </div>
                   <span class="mark-cell__name">node glyph (primary)</span>
                 </div>
                 <div class="mark-cell">
-                  <div class="mark-cursor">
-                    dr<span class="sep">;</span>
-                  </div>
+                  <div class="mark-cursor">dr<span class="sep">;</span></div>
                   <span class="mark-cell__name">cursor (favicon)</span>
                 </div>
               </div>
             </div>
             <p class="frame__caption">
-              The stroked "node" monogram dual-reads as an R and a two-node
-              system diagram; the mono "dr;" mark is the lightweight favicon
-              fallback. Both inherit currentColor and hold up in dark mode.
+              The stroked "node" monogram dual-reads as an R and a two-node system diagram; the mono
+              "dr;" mark is the lightweight favicon fallback. Both inherit currentColor and hold up
+              in dark mode.
             </p>
           </div>
 
@@ -1552,8 +1509,8 @@
                   </button>
                 </div>
                 <div class="phone__body">
-                  Tap the menu to open the sheet. It enters from the right over a
-                  dimmed backdrop, with mono index numbers beside each link.
+                  Tap the menu to open the sheet. It enters from the right over a dimmed backdrop,
+                  with mono index numbers beside each link.
                 </div>
                 <div class="sheet-backdrop" id="sheet-backdrop"></div>
                 <nav class="sheet" aria-label="Mobile">
@@ -1576,30 +1533,18 @@
                       <path d="M6 6l12 12M18 6 6 18" />
                     </svg>
                   </button>
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">01</span> Home</a
-                  >
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">02</span> About</a
-                  >
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">03</span> Resume</a
-                  >
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">04</span> Projects</a
-                  >
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">05</span> Blog</a
-                  >
-                  <a class="sheet__link" href="#"
-                    ><span class="sheet__idx">06</span> Contact</a
-                  >
+                  <a class="sheet__link" href="#"><span class="sheet__idx">01</span> Home</a>
+                  <a class="sheet__link" href="#"><span class="sheet__idx">02</span> About</a>
+                  <a class="sheet__link" href="#"><span class="sheet__idx">03</span> Resume</a>
+                  <a class="sheet__link" href="#"><span class="sheet__idx">04</span> Projects</a>
+                  <a class="sheet__link" href="#"><span class="sheet__idx">05</span> Blog</a>
+                  <a class="sheet__link" href="#"><span class="sheet__idx">06</span> Contact</a>
                 </nav>
               </div>
             </div>
             <p class="frame__caption">
-              Keeps content in place behind a backdrop and scales to six items;
-              the index numbers reinforce the mono / editorial system.
+              Keeps content in place behind a backdrop and scales to six items; the index numbers
+              reinforce the mono / editorial system.
             </p>
           </div>
         </div>
@@ -1629,29 +1574,25 @@
       // Theme toggle: forces [data-theme] on <html>, beating the media query.
       (function () {
         var root = document.documentElement;
-        document
-          .getElementById('theme-toggle')
-          .addEventListener('click', function () {
-            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            root.setAttribute('data-theme', next);
-          });
+        document.getElementById("theme-toggle").addEventListener("click", function () {
+          var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+        });
 
         // Mobile nav sheet demo.
-        var phone = document.getElementById('phone');
+        var phone = document.getElementById("phone");
         function setOpen(open) {
-          phone.classList.toggle('open', open);
+          phone.classList.toggle("open", open);
         }
-        document.getElementById('sheet-open').addEventListener('click', function () {
+        document.getElementById("sheet-open").addEventListener("click", function () {
           setOpen(true);
         });
-        document.getElementById('sheet-close').addEventListener('click', function () {
+        document.getElementById("sheet-close").addEventListener("click", function () {
           setOpen(false);
         });
-        document
-          .getElementById('sheet-backdrop')
-          .addEventListener('click', function () {
-            setOpen(false);
-          });
+        document.getElementById("sheet-backdrop").addEventListener("click", function () {
+          setOpen(false);
+        });
       })();
     </script>
   </body>

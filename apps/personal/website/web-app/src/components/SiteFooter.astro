@@ -1,0 +1,113 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: "https://github.com/ryangreenup", label: "GitHub" },
+  { href: "https://www.linkedin.com/in/ryan-greenup-866685294", label: "LinkedIn" },
+  { href: "mailto:ryanxgreenup@gmail.com", label: "Email" },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__meta">
+      <span class="site-footer__name">Ryan Greenup</span>
+      <span class="site-footer__dot" aria-hidden="true">.</span>
+      <span>Full-stack software and data engineer</span>
+    </p>
+    <nav aria-label="Social">
+      <ul class="site-footer__links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} rel="me noopener" class="site-footer__link">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <p class="site-footer__copy">
+      &copy; {year} Ryan Greenup. Built with{" "}
+      <a class="site-footer__credit" href="https://github.com/withastro/astro" rel="noopener">Astro</a>
+      <span class="site-footer__sep" aria-hidden="true">/</span>
+      <a class="site-footer__credit" href="https://github.com/solidjs/solid" rel="noopener">Solid-JS</a>
+      <!-- and <a class="site-footer__credit" href="https://github.com/vanilla-extract-css/vanilla-extract" rel="noopener">Vanilla Extract</a> -->
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface-raised);
+  }
+  .site-footer__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: var(--spacing-8) var(--spacing-6);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-4) var(--spacing-6);
+  }
+  .site-footer__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--text-sm);
+    color: var(--fg-secondary);
+  }
+  .site-footer__name {
+    font-weight: var(--weight-semibold);
+    color: var(--fg-primary);
+  }
+  .site-footer__dot {
+    color: var(--fg-muted);
+  }
+  .site-footer__links {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-4);
+    margin-inline: auto;
+  }
+  .site-footer__link {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--fg-secondary);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+  .site-footer__link:hover {
+    color: var(--accent);
+  }
+  .site-footer__copy {
+    font-size: var(--text-xs);
+    color: var(--fg-tertiary);
+    font-family: var(--font-mono);
+  }
+  .site-footer__credit {
+    color: var(--fg-secondary);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition:
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+  }
+  .site-footer__credit:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .site-footer__sep {
+    margin-inline: var(--spacing-1);
+    color: var(--fg-muted);
+  }
+
+  @media (max-width: 640px) {
+    .site-footer__links {
+      margin-inline: 0;
+      width: 100%;
+      order: 3;
+    }
+  }
+</style>

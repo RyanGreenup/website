@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css'
+import { style } from "@vanilla-extract/css";
 
-import { font, textSize, tracking } from '../tokens'
-import { vars } from '../theme.css'
+import { vars } from "../theme.css";
+import { font, textSize, tracking } from "../tokens";
 
 /**
  * The eyebrow / kicker: a small uppercase mono label that sits above a hero or
@@ -11,11 +11,11 @@ import { vars } from '../theme.css'
  * reads from the typed contract, so it flips in dark mode.
  */
 export const kicker = style({
-  display: 'inline-block',
+  display: "inline-block",
   fontFamily: font.mono,
   fontSize: textSize.xs,
-  fontWeight: '500',
-  textTransform: 'uppercase',
+  fontWeight: "500",
+  textTransform: "uppercase",
   letterSpacing: tracking.kicker,
   color: vars.roles.accentStrong,
-})
+});

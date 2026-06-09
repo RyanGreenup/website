@@ -5,7 +5,7 @@ import { memoryCache, svgoOptimizer } from "astro/config";
 
 import type { AstroUserConfig } from "astro";
 
-// Core Astro configuration shared by all @impress deployments. Apps import this
+// Core Astro configuration shared by all apps in this monorepo. Apps import this
 // and layer their own overrides via `mergeConfig` from "astro/config".
 //
 // Typed as the default (non-generic) AstroUserConfig on purpose: defineConfig

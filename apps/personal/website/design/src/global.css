@@ -1,19 +1,16 @@
-@import '@fontsource/ibm-plex-sans/400.css';
-@import '@fontsource/ibm-plex-sans/500.css';
-@import '@fontsource/ibm-plex-sans/600.css';
-@import '@fontsource/ibm-plex-sans/700.css';
-@import '@fontsource/ibm-plex-mono/400.css';
-@import '@fontsource/ibm-plex-mono/500.css';
-@import '@fontsource/ibm-plex-mono/600.css';
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 
 /* Design tokens as plain CSS custom properties (de-Tailwinded — was @theme). */
 :root {
   /* ── Fonts ──────────────────────────────────────────── */
-  --font-sans:
-    'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Code',
-    monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", "Cascadia Code", monospace;
 
   /* ── Font weights ───────────────────────────────────── */
   --weight-regular: 400;
@@ -63,6 +60,7 @@
   --measure: 68ch;
 
   /* ── Spacing (0.25rem unit) ─────────────────────────── */
+  --spacing-0: 0;
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
@@ -89,7 +87,7 @@
   --duration-slow: 320ms;
 }
 
-/* ── Semantic tokens (light mode) — UniRemit cool-slate + indigo ───── */
+/* ── Semantic tokens (light mode) — cool-slate + indigo ───── */
 :root {
   --surface-base: #f7f9fa;
   --surface-raised: #ffffff;
@@ -126,9 +124,45 @@
   --status-info-soft: #e4f3fb;
 }
 
-/* ── Dark mode — UniRemit slate surfaces, lifted indigo accent ─────── */
+/* Dark mode: explicit [data-theme="dark"] and system preference */
+:root[data-theme="dark"] {
+  --surface-base: #0e1217;
+  --surface-raised: #161b22;
+  --surface-sunken: #0b0f14;
+  --surface-overlay: #1c232c;
+  --surface-hover: #222a33;
+
+  --fg-primary: #e6eaee;
+  --fg-secondary: #aeb7c0;
+  --fg-tertiary: #8a949e;
+  --fg-muted: #6e7882;
+  --fg-on-accent: #08213f;
+
+  --border-subtle: #2a323b;
+  --border-default: #3b454f;
+  --border-strong: #566069;
+
+  --accent: #9cc0ff;
+  --accent-soft: #18263c;
+  --accent-border: #2e4a86;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-focus: 0 0 0 3px rgba(156, 192, 255, 0.45);
+
+  --status-success: #2fae70;
+  --status-success-soft: #122a20;
+  --status-warning: #d9952b;
+  --status-warning-soft: #2a2110;
+  --status-error: #e15b5b;
+  --status-error-soft: #2c1718;
+  --status-info: #34a6dc;
+  --status-info-soft: #0f2630;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --surface-base: #0e1217;
     --surface-raised: #161b22;
     --surface-sunken: #0b0f14;

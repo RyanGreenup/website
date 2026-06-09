@@ -1,7 +1,9 @@
-// Themed reference implementations of the behavioural primitives, with the
-// global theme contract applied. These are examples for consumers building a
-// branded component library. The primitives at the package root stay
-// aesthetics-free and describe behaviour only.
+/*
+ * Themed reference implementations of the behavioural primitives, with the
+ * global theme contract applied. These are examples for consumers building a
+ * branded component library. The primitives at the package root stay
+ * aesthetics-free and describe behaviour only.
+ */
 
 export { Accordion, AccordionItem, Root } from "./Accordion";
 export type { AccordionItemProps } from "./Accordion";

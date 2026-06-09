@@ -4,7 +4,7 @@
 
 ```ts
 /**
- * UniRemit semantic status colour families.
+ * Semantic status colour families.
  *
  * Each family carries four roles: `base` (solid), `fg` (text or icon on tint),
  * `bg` (subtle tint fill), and `border` (tint outline). Light and dark are
@@ -30,13 +30,7 @@ export type StatusFamily = {
   border: string;
 };
 
-export type StatusKey =
-  | "success"
-  | "warning"
-  | "danger"
-  | "info"
-  | "neutral"
-  | "promo";
+export type StatusKey = "success" | "warning" | "danger" | "info" | "neutral" | "promo";
 
 export type StatusScale = Record<StatusKey, StatusFamily>;
 
@@ -65,7 +59,7 @@ export const statusDark: StatusScale = {
 
 ```ts
 /**
- * UniRemit semantic colour roles (theme-dependent).
+ * Semantic colour roles (theme-dependent).
  *
  * Surface, text, brand and accent roles. These mirror the CSS custom
  * properties defined in `global.css` (`--surface-*`, `--fg-*`, `--accent*`,

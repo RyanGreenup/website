@@ -3,7 +3,7 @@ import { defineConfig, devices } from "@playwright/test";
 const PORT = 6007;
 const BASE_URL = `http://localhost:${PORT}`;
 
-// Standalone E2E suite for the ni-storybook components. Tests navigate directly
+// Standalone E2E suite for the website-storybook components. Tests navigate directly
 // to story iframes (e.g. /iframe.html?id=ni-ui-arrows--default) and assert
 // real-browser behaviour with web-first (auto-retrying) assertions.
 export default defineConfig({

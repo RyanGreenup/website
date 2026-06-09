@@ -2,6 +2,8 @@ import { globalStyle, style } from "@vanilla-extract/css";
 
 import { tokens, vars } from "../../styles/theme.css";
 
+const colors = vars.color.pop;
+
 /**
  * The exemplar mirrors the primitive's supported CSS selector range for
  * zero-based carousel slide states.
@@ -55,10 +57,10 @@ const activeIndicatorSelectors = [
 ] as const;
 
 export const carousel = style({
-  background: vars.color.ni.white,
-  border: `1px solid ${vars.color.ni.grey}`,
+  background: colors.paper,
+  border: `2px solid ${colors.ink}`,
   borderRadius: tokens.radius.card,
-  boxShadow: "0 18px 48px rgb(15 23 42 / 14%)",
+  boxShadow: `8px 8px 0 ${colors.ink}`,
   maxWidth: "42rem",
   overflow: "hidden",
   padding: "0.75rem",
@@ -70,7 +72,7 @@ globalStyle(`${carousel} [data-carousel-viewport]`, {
 
 globalStyle(`${carousel} [data-carousel-item]`, {
   aspectRatio: "16 / 10",
-  background: vars.color.ni.offWhite,
+  background: colors.paperShade,
 });
 
 globalStyle(`${carousel} img`, {
@@ -79,17 +81,18 @@ globalStyle(`${carousel} img`, {
 
 globalStyle(`${carousel} [data-carousel-control]`, {
   alignItems: "center",
-  background: "rgb(255 255 255 / 88%)",
-  border: `1px solid ${vars.color.ni.grey}`,
+  background: colors.marigold,
+  border: `2px solid ${colors.ink}`,
   borderRadius: "999px",
-  boxShadow: "0 12px 26px rgb(15 23 42 / 18%)",
-  color: vars.color.ni.darkBlue,
+  boxShadow: `3px 3px 0 ${colors.ink}`,
+  color: colors.ink,
   display: "inline-flex",
   fontFamily: tokens.font.outfit,
   fontSize: "0",
   justifyContent: "center",
   marginRight: "1rem",
-  transition: "background-color 160ms ease, opacity 180ms ease, transform 160ms ease",
+  transition:
+    "background-color 160ms ease, box-shadow 160ms ease, opacity 180ms ease, transform 160ms ease",
 });
 
 globalStyle(`${carousel} [data-carousel-side="previous"]`, {
@@ -115,7 +118,7 @@ globalStyle(`${carousel} [data-carousel-side="next"]::after`, {
 });
 
 globalStyle(`${carousel} [data-carousel-control]:hover`, {
-  background: vars.color.ni.white,
+  background: colors.pink,
 });
 
 globalStyle(`${carousel} [data-carousel-side="previous"]:hover`, {
@@ -132,26 +135,28 @@ globalStyle(`${carousel} [data-carousel-control][data-carousel-disabled]`, {
 
 globalStyle(`${carousel} [data-carousel-indicator]`, {
   alignItems: "center",
-  background: vars.color.ni.offWhite,
-  border: `1px solid ${vars.color.ni.grey}`,
+  background: colors.paper,
+  border: `2px solid ${colors.ink}`,
   borderRadius: "999px",
-  color: vars.color.ni.muted,
+  color: colors.ink,
   display: "inline-flex",
   fontFamily: tokens.font.outfit,
   fontSize: tokens.text.sm,
   fontWeight: 700,
   justifyContent: "center",
-  transition: "background-color 160ms ease, color 160ms ease, transform 160ms ease",
+  transition:
+    "background-color 160ms ease, box-shadow 160ms ease, color 160ms ease, transform 160ms ease",
 });
 
 globalStyle(`${carousel} [data-carousel-indicator]:hover`, {
-  color: vars.color.ni.darkBlue,
+  background: colors.marigold,
   transform: "translateY(-1px)",
 });
 
 for (const index of activeIndicatorSelectors) {
   globalStyle(`${carousel}:has(input[value="${index}"]:checked) [data-carousel-index="${index}"]`, {
-    background: vars.color.ni.darkBlue,
-    color: vars.color.ni.white,
+    background: colors.pink,
+    boxShadow: `2px 2px 0 ${colors.ink}`,
+    color: colors.cloud,
   });
 }

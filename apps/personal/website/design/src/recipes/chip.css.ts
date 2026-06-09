@@ -1,7 +1,7 @@
-import { recipe } from '@vanilla-extract/recipes'
+import { recipe } from "@vanilla-extract/recipes";
 
-import { font, radius, space, textSize, tracking } from '../tokens'
-import { vars } from '../theme.css'
+import { vars } from "../theme.css";
+import { font, radius, space, textSize, tracking } from "../tokens";
 
 /**
  * Tag chip: the small pill used for tech tags (TypeScript, Rust, ...) and post
@@ -12,19 +12,19 @@ import { vars } from '../theme.css'
  */
 export const chip = recipe({
   base: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    height: '24px',
-    paddingInline: space['2'],
+    display: "inline-flex",
+    alignItems: "center",
+    height: "24px",
+    paddingInline: space["2"],
     borderRadius: radius.sm,
     border: `1px solid ${vars.roles.border.base}`,
     background: vars.roles.bg.sunken,
     color: vars.roles.fg.muted,
     fontFamily: font.sans,
     fontSize: textSize.xs,
-    fontWeight: '500',
+    fontWeight: "500",
     letterSpacing: tracking.wide,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap",
   },
   variants: {
     tone: {
@@ -41,9 +41,9 @@ export const chip = recipe({
       },
     },
     mono: {
-      true: { fontFamily: font.mono, letterSpacing: '0' },
+      true: { fontFamily: font.mono, letterSpacing: "0" },
       false: {},
     },
   },
-  defaultVariants: { tone: 'default', mono: false },
-})
+  defaultVariants: { tone: "default", mono: false },
+});

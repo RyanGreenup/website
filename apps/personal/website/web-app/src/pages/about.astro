@@ -1,0 +1,236 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TagChip from "../components/TagChip.astro";
+
+const skills = [
+  {
+    group: "Languages",
+    items: ["TypeScript", "Python", "SQL", "Rust", "Go", "R"],
+  },
+  {
+    group: "Tools",
+    items: ["Astro", "SolidJS", "Vite", "PostgreSQL", "ClickHouse", "Docker", "Kubernetes"],
+  },
+  {
+    group: "Systems",
+    items: [
+      "ETL pipelines",
+      "CDC",
+      "GitOps (Flux)",
+      "API design",
+      "Observability",
+      "Machine learning",
+    ],
+  },
+];
+
+const timeline = [
+  {
+    role: "Software Engineer",
+    org: "We Are Impress",
+    period: "Feb 2026 - Present",
+    summary:
+      `Full ownership of production infrastructure across AWS EC2 and
+DigitalOcean Kubernetes clusters. Deliver frontend work for National
+Intermodal, SunRice, and Stone & Chalk. Build internal diagnostics tooling with
+TypeScript compiler API, CodeGraph and Babel.`,
+    url: "https://www.impressdesign.com.au/",
+  },
+  {
+    role: "Contract Software Engineer",
+    org: "CCAFP",
+    period: "2025 - 2026",
+    summary:
+      `Designed and deployed an LLM-automated superannuation application with
+SolidJS, Tailwind, and PostgreSQL. Integrated AWS Bedrock for inference.
+Deployed to Kubernetes with Flux GitOps.`,
+    url: "https://ccafp.com.au/",
+  },
+  {
+    role: "Lead Developer / Full-Stack Data Engineer",
+    org: "Gforce Category Solutions",
+    period: "Nov 2024 - Feb 2026",
+    summary:
+    `Designed and implemented database infrastructure, including the deployment
+of CDC PostgreSQL/ClickHouse. Easily cutting costs by
+$2,000/month. Built analytics dashboard, CNN quality control, and playwright ETL
+pipelines. Automated reporting saving well over 20 hrs/week.`,
+    url: "https://www.gforceaus.com/",
+  },
+  {
+    role: "ML Researcher & Instructor",
+    org: "ICNS / WSU / CBA",
+    period: "2022 - 2024",
+    summary:
+      `Neuromorphic computing research at ICNS. Developed and delivered a
+third-year Time Series Analysis curriculum at WSU. Delivered data science
+training at Commonwealth Bank.`,
+    url: "https://www.westernsydney.edu.au/",
+  },
+];
+---
+
+<BaseLayout title="About" description="Ryan Greenup - software and data engineer. Background, skills, and experience.">
+  <header class="page-head">
+    <p class="kicker">About</p>
+    <h1 class="page-head__title">Engineer first, by temperament.</h1>
+    <p class="page-head__lede">
+      I like problems where the constraints are real and the feedback is honest:
+      a query that's too slow, a pipeline that won't balance, a deploy that broke
+      something it shouldn't have touched.
+    </p>
+  </header>
+
+  <div class="about-grid">
+    <div class="about-bio">
+      <p>
+        I'm a full-stack software and data engineer with a track record of
+        shipping production systems. Most of my work has
+        been at the intersection of infrastructure and data: building out k8s and Flux,
+        your typical ETL pipelines with playwright and all the mess in between etc.
+        Generally automating what used to be labourious.
+      </p>
+      <p>
+        These days I spend a lot of time on Kubernetes and Flux, but my background is math 
+        and data science. Training CNNs for quality control, designing event-sourced
+        architectures, and of course building LLM-powered applications.
+
+        I write TypeScript and Python for daily work, Rust and Go when the
+        machine needs to be careful or I can find a good enough excuse.
+      </p>
+      <p>
+        Away from the keyboard I'm usually reading up on the next thing to learn,
+        tinkering with homelab infrastructure, or out with Zellie.
+      </p>
+    </div>
+
+    <aside class="about-skills" aria-label="Skills">
+      {
+        skills.map((s) => (
+          <div class="skill-group">
+            <h2 class="skill-group__title">{s.group}</h2>
+            <div class="skill-group__items">
+              {s.items.map((i) => (
+                <TagChip label={i} mono />
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </aside>
+  </div>
+
+  <section class="section" style="margin-top: var(--spacing-16)">
+    <div class="section__head">
+      <h2 class="section__title">Where I've worked</h2>
+    </div>
+    <ol class="timeline">
+      {
+        timeline.map((t) => (
+          <li class="timeline__item">
+            <div class="timeline__period">{t.period}</div>
+            <div class="timeline__body">
+              <h3 class="timeline__role">
+                {t.role} <span class="timeline__org">/ {t.org}</span>
+              </h3>
+              <p class="timeline__summary">{t.summary}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 16rem;
+    gap: var(--spacing-16);
+    align-items: start;
+  }
+  .about-bio {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--fg-primary);
+    max-width: 68ch;
+  }
+
+  .about-skills {
+    position: sticky;
+    top: 84px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6);
+    background: var(--surface-raised);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xl);
+  }
+  .skill-group__title {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--fg-tertiary);
+    margin-bottom: var(--spacing-3);
+  }
+  .skill-group__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+  }
+
+  .timeline {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: var(--spacing-6);
+    padding-block: var(--spacing-6);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .timeline__item:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .timeline__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--fg-tertiary);
+    padding-top: 0.15rem;
+  }
+  .timeline__role {
+    font-size: var(--text-lg);
+    color: var(--fg-primary);
+  }
+  .timeline__org {
+    color: var(--fg-secondary);
+    font-weight: var(--weight-regular);
+  }
+  .timeline__summary {
+    margin-top: var(--spacing-2);
+    color: var(--fg-secondary);
+    max-width: 68ch;
+    line-height: var(--leading-normal);
+  }
+
+  @media (max-width: 860px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-10);
+    }
+    .about-skills {
+      position: static;
+    }
+    .timeline__item {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2);
+    }
+  }
+</style>

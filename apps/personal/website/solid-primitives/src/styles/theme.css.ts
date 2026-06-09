@@ -22,27 +22,21 @@ const toKebabCase = (stringVal: string) =>
 export const vars = createGlobalThemeContract(
   {
     color: {
-      ni: {
-        charcoal: null,
-        darkBlue: null,
-        darkGrey: null,
-        faint: null,
-        gradientBlue: null,
-        green: null,
-        grey: null,
-        midBlue: null,
-        midnight: null,
-        muted: null,
-        offWhite: null,
-        orange: null,
-        overlayBlue: null,
-        red: null,
-        slate: null,
-        trueBlue: null,
-        vibrantBlue: null,
-        vibrantPurple: null,
-        white: null,
-        yellow: null,
+      // A neo-brutalist riso-pop demo skin: flat fluoro inks printed on warm
+      // paper, outlined in heavy ink, with hard offset shadows. Purely a sample
+      // brand, swap it for the consuming design system's contract.
+      pop: {
+        ash: null,
+        cloud: null,
+        grape: null,
+        ink: null,
+        lime: null,
+        marigold: null,
+        paper: null,
+        paperShade: null,
+        pink: null,
+        sky: null,
+        tangerine: null,
       },
       // oxlint-disable-next-line sort-keys
       surface: {
@@ -65,40 +59,31 @@ export const vars = createGlobalThemeContract(
 
 createGlobalTheme(":root", vars, {
   color: {
-    ni: {
-      charcoal: "#242424",
-      darkBlue: "#060c35",
-      darkGrey: "#2d3639",
-      faint: "#eaeaea",
-      gradientBlue: "#170e68",
-      green: "#40f033",
-      grey: "#c8c8c8",
-      midBlue: "#0e0e68",
-      midnight: "#0f172b",
-      muted: "#a4a4a4",
-      offWhite: "#f2f2f2",
-      orange: "#ff7300",
-      overlayBlue: "#0a1133",
-      red: "#e51414",
-      slate: "#62748e",
-      trueBlue: "#1e00be",
-      vibrantBlue: "#00aaff",
-      vibrantPurple: "#8232ff",
-      white: "#ffffff",
-      yellow: "#ffff00",
+    pop: {
+      ash: "#9a93a6",
+      cloud: "#ffffff",
+      grape: "#6c4cff",
+      ink: "#15101f",
+      lime: "#a6e22e",
+      marigold: "#ffce26",
+      paper: "#fff6ea",
+      paperShade: "#f2e4d0",
+      pink: "#ff4d6d",
+      sky: "#34b3f1",
+      tangerine: "#ff8a3d",
     },
     surface: {
-      "100": "#ffffff",
-      "200": "#ffffff",
-      "300": "#ffffff",
-      "400": "#ffffff",
-      "50": "#ffffff",
-      "500": "#ffffff",
-      "600": "#ffffff",
-      "700": "#ffffff",
-      "800": "#ffffff",
-      "900": "#ffffff",
-      "950": "#ffffff",
+      "100": "#fff6ea",
+      "200": "#f7ead8",
+      "300": "#ecd9bf",
+      "400": "#d8c0a3",
+      "50": "#fffaf2",
+      "500": "#b09a82",
+      "600": "#82705f",
+      "700": "#574a3f",
+      "800": "#332a26",
+      "900": "#1f1922",
+      "950": "#15101f",
     },
   },
 });
@@ -279,8 +264,8 @@ createGlobalTheme(":root", tokens, {
     xs: "0.8125rem",
   },
   ui: {
-    primary: vars.color.ni.trueBlue,
-    secondary: vars.color.ni.vibrantBlue,
+    primary: vars.color.pop.pink,
+    secondary: vars.color.pop.grape,
   },
   // oxlint-disable-next-line id-length
   z: {

@@ -1,0 +1,41 @@
+---
+interface Props {
+  label: string;
+  mono?: boolean;
+  variant?: "default" | "brand" | "accent";
+}
+const { label, mono = false, variant = "default" } = Astro.props;
+---
+
+<span class:list={["chip", `chip--${variant}`, { "chip--mono": mono }]}>{label}</span>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding-inline: var(--spacing-2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-default);
+    background: var(--surface-sunken);
+    color: var(--fg-secondary);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+  }
+  .chip--mono {
+    font-family: var(--font-mono);
+    letter-spacing: 0;
+  }
+  .chip--brand {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent);
+  }
+  .chip--accent {
+    background: var(--surface-sunken);
+    border-color: var(--border-subtle);
+    color: var(--fg-tertiary);
+  }
+</style>
