@@ -1,0 +1,34 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+// Design system: global.css pulls in the IBM Plex webfonts and the plain-CSS
+// token layer (and sets the body surface); theme.css registers the typed
+// role/status theme contract on :root so recipes resolve their colours and
+// flip light/dark. Importing both here applies them site-wide.
+import "@rs/ryan-personal-website-design/global.css";
+import "@rs/ryan-personal-website-design/theme.css";
+
+import Seo from "../components/Seo.astro";
+
+interface Props {
+  /** Page title for the document and SEO. */
+  readonly title: string;
+  /** Meta description for the document and SEO. */
+  readonly description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo title={title} description={description} />
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

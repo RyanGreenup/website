@@ -1,6 +1,6 @@
 import { defineConfig } from "oxlint";
-import { baseConfig } from "@impress/oxlint-config/base";
-import { jsdocConfig } from "@impress/oxlint-config/jsdoc";
+import { baseConfig } from "@rs/oxlint-config/base";
+import { jsdocConfig } from "@rs/oxlint-config/jsdoc";
 
 export default defineConfig({
   extends: [baseConfig, jsdocConfig],

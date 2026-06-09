@@ -23,6 +23,12 @@ export const fontWeight = {
   bold: '700',
 } as const
 
+/**
+ * Editorial type scale for the personal site. Body base is 15px (`md`); the
+ * scale opens up at the top end (52/64px display) for hero headlines. The two
+ * sub-12px steps (`3xs`/`2xs`) are retained from the lifted contract for dense
+ * mono metadata; they are rarely used here.
+ */
 export const textSize = {
   // 10px
   '3xs': '0.625rem',
@@ -32,50 +38,60 @@ export const textSize = {
   xs: '0.75rem',
   // 13px
   sm: '0.8125rem',
-  // 16px
-  md: '1rem',
-  // 18px
-  lg: '1.125rem',
+  // 15px, body base
+  md: '0.9375rem',
+  // 17px
+  lg: '1.0625rem',
   // 20px
   xl: '1.25rem',
   // 24px
   '2xl': '1.5rem',
-  // 28px
-  '3xl': '1.75rem',
-  // 34px
-  '4xl': '2.125rem',
-  // 42px, display/hero heading
-  '5xl': '2.625rem',
+  // 31px
+  '3xl': '1.9375rem',
+  // 40px
+  '4xl': '2.5rem',
+  // 52px, display
+  '5xl': '3.25rem',
+  // 64px, hero display
+  '6xl': '4rem',
 } as const
 
 export const leading = {
-  tight: '1.2',
-  snug: '1.35',
-  normal: '1.55',
-  relaxed: '1.7',
-  /** Mono blocks: references, code, deposit IDs. */
+  /** Display/hero headlines. */
+  tight: '1.12',
+  /** Card titles, compact headings. */
+  snug: '1.3',
+  /** Body copy. */
+  normal: '1.6',
+  /** Long-form reading column (prose, lede). */
+  relaxed: '1.75',
+  /** Mono blocks: code, references, IDs. */
   mono: '1.6',
 } as const
 
 export const tracking = {
-  tight: '-0.01em',
+  tight: '-0.015em',
   normal: '0em',
-  wide: '0.04em',
+  wide: '0.02em',
+  /** Uppercase section labels (resume/skill headings). */
+  caps: '0.08em',
+  /** Mono uppercase kickers (eyebrows). */
+  kicker: '0.16em',
   mono: '0.02em',
 } as const
 
 export const radius = {
   none: '0',
-  // 4px
-  xs: '0.25rem',
-  // 6px
-  sm: '0.375rem',
-  // 8px
-  md: '0.5rem',
-  // 12px
-  lg: '0.75rem',
-  // 16px
-  xl: '1rem',
+  // 4px, chips
+  sm: '0.25rem',
+  // 6px, buttons, nav links, brand tile
+  md: '0.375rem',
+  // 8px, icon tiles, code blocks
+  lg: '0.5rem',
+  // 12px, cards
+  xl: '0.75rem',
+  // 16px, large surfaces
+  '2xl': '1rem',
   pill: '999px',
   full: '50%',
 } as const
@@ -100,18 +116,41 @@ export const space = {
   '10': '2.5rem',
   // 48px
   '12': '3rem',
+  // 64px, page rail top
+  '16': '4rem',
+  // 80px
+  '20': '5rem',
+  // 96px, section rhythm + rail bottom
+  '24': '6rem',
+  // 128px
+  '32': '8rem',
   auto: 'auto',
+} as const
+
+/**
+ * Reading-measure and rail widths for the editorial layout. `measure` caps a
+ * single column of prose for legibility; `contentMax` is the page rail;
+ * `proseMax` is the narrower long-form reading column (blog post, contact).
+ */
+export const layout = {
+  measure: '68ch',
+  contentMax: '64rem',
+  proseMax: '42rem',
 } as const
 
 export const duration = {
   fast: '120ms',
-  base: '180ms',
-  slow: '280ms',
+  base: '200ms',
+  slow: '320ms',
 } as const
 
 export const ease = {
   out: 'cubic-bezier(0.2, 0, 0, 1)',
   inOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  /** The default UI easing for colour/position transitions. */
+  standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  /** Staged page-load reveals (kicker, headline, lede rising in sequence). */
+  reveal: 'cubic-bezier(0.16, 1, 0.3, 1)',
 } as const
 
 // Derived transition presets

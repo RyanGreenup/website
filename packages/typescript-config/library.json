@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    // Node library: no browser globals, emit JS + declarations to the consumer's outDir.
+    // ESNext is safe on a controlled runtime (Node 22+); module stays NodeNext (from base)
+    // for correct Node ESM resolution.
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "sourceMap": true,
+    "verbatimModuleSyntax": true
+  }
+}

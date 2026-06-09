@@ -1,0 +1,8 @@
+{
+  "extends": "@rs/typescript-config/solid-library.json",
+  "compilerOptions": {
+    "customConditions": ["@rs/source"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "src/**/*.test.ts", "src/**/*.test.tsx"]
+}

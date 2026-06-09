@@ -1,0 +1,52 @@
+{
+  "name": "@rs/ryan-personal-website",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Ryan's personal website (Astro + SolidJS + vanilla-extract).",
+  "homepage": "https://github.com/RyanGreenup/kubernetes-3#readme",
+  "bugs": {
+    "url": "https://github.com/RyanGreenup/kubernetes-3/issues"
+  },
+  "license": "MIT",
+  "author": "Ryan Greenup <ryanxgreenup@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGreenup/kubernetes-3.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "pnpm run check-types && pnpm run lint && pnpm run test",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "oxfmt -c ./.config/oxfmtrc.ts --check .",
+    "format:write": "oxfmt -c ./.config/oxfmtrc.ts .",
+    "lint": "oxlint --fix-suggestions -c ./.config/oxlint.config.ts src",
+    "check-types": "astro check",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/compiler-rs": "^0.2.1",
+    "@astrojs/node": "^10.1.1",
+    "@astrojs/solid-js": "^6.0.1",
+    "@rs/ryan-personal-website-astro-base": "workspace:*",
+    "@rs/ryan-personal-website-components": "workspace:*",
+    "@rs/ryan-personal-website-design": "workspace:*",
+    "@vanilla-extract/css": "^1.20.1",
+    "astro": "^6.3.7",
+    "solid-js": "^1.9.13",
+    "vite": "7.3.3"
+  },
+  "devDependencies": {
+    "@rs/oxlint-config": "workspace:*",
+    "@playwright/test": "^1.60.0",
+    "@vanilla-extract/vite-plugin": "^5.2.2",
+    "oxlint-tsgolint": "^0.23.0",
+    "tsx": "^4.20.6"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

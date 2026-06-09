@@ -123,7 +123,7 @@ export const button = recipe({
 /**
  * The loading spinner shown inside a button. Sizes to the text (`1em`) and
  * inherits `currentColor`, so it reads correctly on every variant. Uses the
- * global `spin` keyframe from `@impress/uniremit-design/global.css`.
+ * global `spin` keyframe defined in this package's `global.css`.
  */
 export const buttonSpinner = style({
   width: '1em',

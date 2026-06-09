@@ -1,0 +1,55 @@
+---
+interface Props {
+  /** Page title; also used for the og/twitter title. */
+  readonly title: string;
+  /** Meta description; also used for the og/twitter description. */
+  readonly description?: string;
+  /** Absolute or site-relative URL of the social share image. */
+  readonly image?: string;
+  /** Site name for og:site_name and JSON-LD. */
+  readonly siteName?: string;
+  /** When true, emit noindex,nofollow. */
+  readonly noindex?: boolean;
+}
+
+const {
+  title,
+  description = "",
+  image,
+  siteName = "Ryan Greenup",
+  noindex = false,
+} = Astro.props;
+
+const base = Astro.site ?? Astro.url;
+const canonical = new URL(Astro.url.pathname, base).href;
+const origin = base.origin;
+const ogImage = image ? new URL(image, base).href : undefined;
+const robots = noindex ? "noindex,nofollow" : "index,follow";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", name: siteName, url: origin },
+    { "@type": "WebSite", name: siteName, url: origin },
+  ],
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={siteName} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

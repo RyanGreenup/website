@@ -1,0 +1,6 @@
+# Playwright e2e output
+/test-results
+/playwright-report
+
+# Dev-hosted vector tiles (choose prod host before launch)
+/public/data/*.pmtiles

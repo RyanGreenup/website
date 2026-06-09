@@ -1,0 +1,57 @@
+{
+  "name": "@rs/ryan-personal-website-storybook",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Storybook for Ryan's personal website components.",
+  "homepage": "https://github.com/RyanGreenup/kubernetes-3#readme",
+  "bugs": {
+    "url": "https://github.com/RyanGreenup/kubernetes-3/issues"
+  },
+  "license": "MIT",
+  "author": "Ryan Greenup <ryanxgreenup@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGreenup/kubernetes-3.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6007 --no-open",
+    "storybook": "storybook dev -p 6007",
+    "build": "storybook build",
+    "build-storybook": "storybook build",
+    "format": "oxfmt -c ./.config/oxfmtrc.ts --check .",
+    "format:write": "oxfmt -c ./.config/oxfmtrc.ts .",
+    "lint": "oxlint --fix-suggestions -c ./.config/oxlint.config.ts src e2e",
+    "check-types": "tsc --noEmit",
+    "check-types:e2e": "tsc -p e2e --noEmit",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "test:storybook": "vitest run --project=storybook || vitest run --project=storybook",
+    "test:e2e": "playwright test",
+    "check": "pnpm run check-types && pnpm run check-types:e2e && pnpm run lint && pnpm run test"
+  },
+  "dependencies": {
+    "@rs/ryan-personal-website-components": "workspace:*",
+    "@rs/ryan-personal-website-design": "workspace:*",
+    "@rs/storybook": "workspace:*",
+    "solid-js": "^1.9.13"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@rs/oxlint-config": "workspace:*",
+    "@rs/typescript-config": "workspace:*",
+    "@playwright/test": "^1.60.0",
+    "@storybook/addon-vitest": "^10.4.1",
+    "@types/node": "^25.9.1",
+    "@vitest/browser-playwright": "4.1.7",
+    "oxlint-tsgolint": "^0.23.0",
+    "playwright": "^1.60.0",
+    "solid-devtools": "^0.34.3",
+    "storybook": "^10.4.1",
+    "storybook-solidjs-vite": "^10.1.0",
+    "tsx": "^4.20.6",
+    "typescript": "^6.0.3",
+    "vite": "7.3.3",
+    "vite-plugin-solid": "^2.11.8",
+    "vitest": "4.1.7"
+  }
+}

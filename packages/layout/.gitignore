@@ -1,0 +1,3 @@
+# Vitest browser-mode (Playwright) run artifacts — generated, never committed.
+.vitest-attachments/
+__screenshots__/

@@ -1,0 +1,43 @@
+{
+  "name": "@rs/oxlint-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared oxlint and oxfmt configuration presets.",
+  "homepage": "https://github.com/RyanGreenup/kubernetes-3#readme",
+  "bugs": {
+    "url": "https://github.com/RyanGreenup/kubernetes-3/issues"
+  },
+  "license": "MIT",
+  "author": "Ryan Greenup <ryanxgreenup@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGreenup/kubernetes-3.git"
+  },
+  "type": "module",
+  "exports": {
+    "./base": "./base.ts",
+    "./jsdoc": "./jsdoc.ts",
+    "./lenient": "./lenient.ts",
+    "./solid-js": "./solid-js.ts",
+    "./fmt": "./fmt/base.ts",
+    "./a11y": "./a11y.ts"
+  },
+  "scripts": {
+    "check": "echo \"$npm_package_name check ok\""
+  },
+  "dependencies": {
+    "oxlint-tsgolint": "^0.23.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@next/eslint-plugin-next": "^16.2.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260524.1",
+    "eslint-plugin-solid": "^0.14.5",
+    "eslint-plugin-sonarjs": "^4.0.3",
+    "eslint-plugin-turbo": "^2.7.1",
+    "globals": "^16.5.0",
+    "oxfmt": "^0.51.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.50.0"
+  }
+}

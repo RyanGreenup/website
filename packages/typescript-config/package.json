@@ -1,0 +1,19 @@
+{
+  "name": "@rs/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared TypeScript configuration presets.",
+  "homepage": "https://github.com/RyanGreenup/kubernetes-3#readme",
+  "bugs": {
+    "url": "https://github.com/RyanGreenup/kubernetes-3/issues"
+  },
+  "license": "MIT",
+  "author": "Ryan Greenup <ryanxgreenup@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGreenup/kubernetes-3.git"
+  },
+  "scripts": {
+    "check": "echo \"$npm_package_name check ok\""
+  }
+}

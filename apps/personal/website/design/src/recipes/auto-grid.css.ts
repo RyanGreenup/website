@@ -1,6 +1,6 @@
 import { recipe } from '@vanilla-extract/recipes'
 
-import { autoGridConfig } from '@impress/layout'
+import { autoGridConfig } from '@rs/layout/recipes'
 
 import { space } from '../tokens'
 
@@ -10,6 +10,6 @@ const autoGridMins = { xs: '8rem', sm: '12rem', md: '16rem', lg: '20rem', xl: '2
 /**
  * The breakpoint-free auto-fit grid, bound to uniremit tokens. The `min`
  * thresholds are intrinsic layout geometry; `gap` reuses the shared scale.
- * Mechanism lives in @impress/layout.
+ * Mechanism lives in @rs/layout.
  */
 export const autoGrid = recipe(autoGridConfig(space, autoGridMins))

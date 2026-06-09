@@ -1,0 +1,60 @@
+{
+  "name": "@rs/ryan-personal-website-components",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Reusable SolidJS components for Ryan's personal website.",
+  "author": "Ryan Greenup <ryanxgreenup@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/RyanGreenup/kubernetes-3#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGreenup/kubernetes-3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RyanGreenup/kubernetes-3/issues"
+  },
+  "exports": {
+    ".": {
+      "@rs/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "solid": "./dist/index.jsx",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "check": "pnpm run check-types && pnpm run test",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "play": "vite",
+    "test": "vitest",
+    "check-types": "tsc --noEmit",
+    "release": "bumpp",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@rs/ryan-personal-website-design": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.9"
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.10",
+    "@types/node": "^25.6.2",
+    "@vanilla-extract/vite-plugin": "^5.2.2",
+    "@vitest/browser-playwright": "^4.1.5",
+    "bumpp": "^11.1.0",
+    "rolldown-plugin-solid": "^0.2.1",
+    "tsdown": "^0.22.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.11",
+    "vite-plugin-solid": "^2.11.12",
+    "vitest": "^4.1.5"
+  }
+}
