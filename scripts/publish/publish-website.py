@@ -3,10 +3,10 @@
 # requires-python = ">=3.11"
 # dependencies = ["typer"]
 # ///
-"""Publish the personal website as a standalone public git repository.
+"""Publish the personal website as a standalone public git repo.
 
-Clones origin into a temp dir, rewrites history with git-filter-repo so only
-the website plus its workspace-package dependencies remain, then prints the
+Clones origin into a temp dir, rewrites history with `git-filter-repo` so only
+the website plus its workspace-package deps remain, then prints the
 push command. Nothing is pushed unless you pass --push.
 """
 
@@ -19,8 +19,7 @@ from pathlib import Path
 
 import typer
 
-# Transitive workspace-dependency closure of apps/personal/website (the site
-# plus the @rs/* packages it imports). Everything else is dropped from history.
+# Workspace paths relevant to the website to keep
 KEEP_PATHS = [
     "apps/personal/website/",
     "packages/layout/",
@@ -30,13 +29,12 @@ KEEP_PATHS = [
     "packages/storybook-solid-code-transform/",
     "scripts/publish/publish-website.py",
 ]
-# Internal k8s manifests that live under a kept prefix but aren't public.
+# k8s manifests that are not yet adapted to be reusable (#TODO)
 DROP_PATHS = [
     "apps/personal/website/primitives-storybook/deploy/",
     "apps/personal/website/website-storybook/deploy/",
 ]
-# README copied to the published repo root so it renders on the GitHub front
-# page. Sourced from the local working tree (it need not be committed yet).
+# README copied to the root so it renders on the frontpage
 README_SRC = "apps/personal/website/web-app/README.md"
 TARGET_URL = "https://github.com/ryangreenup/website.git"
 
@@ -44,7 +42,7 @@ app = typer.Typer(add_completion=False, help=__doc__)
 
 
 def run(cmd: list[str], *, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
-    """Run a command (echoing it first), raising on non-zero exit."""
+    """Run a command, echoing first, raising on non-zero exit."""
     typer.secho("  $ " + " ".join(cmd), fg=typer.colors.BRIGHT_BLACK)
     return subprocess.run(cmd, cwd=cwd, check=True, text=True, capture_output=True)
 
@@ -52,8 +50,7 @@ def run(cmd: list[str], *, cwd: Path | None = None) -> subprocess.CompletedProce
 def copy_readme(repo_root: Path, clone_dir: Path) -> None:
     """Copy the web-app README into the published repo root and commit it.
 
-    Sourced from the local working tree (it need not be committed yet) so the
-    README renders on the GitHub front page. Skips with a warning if missing.
+    Skips with a warning if missing.
     """
     top_level = Path(
         run(["git", "rev-parse", "--show-toplevel"], cwd=repo_root).stdout.strip()
