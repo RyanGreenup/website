@@ -29,13 +29,22 @@ KEEP_PATHS = [
     "packages/storybook-solid-code-transform/",
     "scripts/publish/publish-website.py",
 ]
-# k8s manifests that are not yet adapted to be reusable (#TODO)
+# Paths purged from published history. Two groups:
+#   - k8s manifests that are not yet adapted to be reusable (#TODO)
+#   - build artifacts
 DROP_PATHS = [
     "apps/personal/website/primitives-storybook/deploy/",
     "apps/personal/website/website-storybook/deploy/",
+    "apps/personal/website/primitives-storybook/storybook-static/",
+    "apps/personal/website/website-storybook/storybook-static/",
+    "apps/personal/website/web-app/.astro/",
+    "apps/personal/website/website-components/.vitest-attachments/",
+    "packages/storybook-solid-code-transform/dist/",
 ]
 # README copied to the root so it renders on the frontpage
 README_SRC = "apps/personal/website/web-app/README.md"
+# LICENSE copied to the root so the public repo is properly licensed
+LICENSE_SRC = "apps/personal/website/LICENSE"
 TARGET_URL = "https://github.com/ryangreenup/website.git"
 
 app = typer.Typer(add_completion=False, help=__doc__)
@@ -47,26 +56,29 @@ def run(cmd: list[str], *, cwd: Path | None = None) -> subprocess.CompletedProce
     return subprocess.run(cmd, cwd=cwd, check=True, text=True, capture_output=True)
 
 
-def copy_readme(repo_root: Path, clone_dir: Path) -> None:
-    """Copy the web-app README into the published repo root and commit it.
+def copy_to_root(
+    repo_root: Path, clone_dir: Path, src_rel: str, dest_name: str, commit_msg: str
+) -> None:
+    """Copy a working-tree file into the published repo root and commit it.
 
-    Skips with a warning if missing.
+    Sourced from the local working tree (need not be committed) so it renders
+    on the GitHub front page. Skips with a warning if the source is missing.
     """
     top_level = Path(
         run(["git", "rev-parse", "--show-toplevel"], cwd=repo_root).stdout.strip()
     )
-    readme_src = top_level / README_SRC
-    if not readme_src.exists():
+    src = top_level / src_rel
+    if not src.exists():
         typer.secho(
-            f"warning: {README_SRC} not found; skipping README copy",
+            f"warning: {src_rel} not found; skipping {dest_name} copy",
             err=True,
             fg=typer.colors.YELLOW,
         )
         return
-    typer.echo("==> copying README to repo root")
-    shutil.copy2(readme_src, clone_dir / "README.md")
-    run(["git", "add", "README.md"], cwd=clone_dir)
-    run(["git", "commit", "-m", "docs: add README"], cwd=clone_dir)
+    typer.echo(f"==> copying {dest_name} to repo root")
+    shutil.copy2(src, clone_dir / dest_name)
+    run(["git", "add", dest_name], cwd=clone_dir)
+    run(["git", "commit", "-m", commit_msg], cwd=clone_dir)
 
 
 @app.command()
@@ -110,7 +122,8 @@ def publish(
         cwd=clone_dir,
     )
 
-    copy_readme(repo_root, clone_dir)
+    copy_to_root(repo_root, clone_dir, LICENSE_SRC, "LICENSE", "chore: add LICENSE")
+    copy_to_root(repo_root, clone_dir, README_SRC, "README.md", "docs: add README")
 
     files = run(["git", "ls-files"], cwd=clone_dir).stdout.split()
     if not files:
