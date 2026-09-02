@@ -41,7 +41,7 @@
     "@astrojs/solid-js": "^6.0.1",
     "@rs/oxlint-config": "workspace:*",
     "astro": "^6.3.7",
-    "oxlint-tsgolint": "^0.23.0",
+    "oxlint-tsgolint": "^0.25.0",
     "solid-js": "^1.9.13",
     "tsx": "^4.20.6",
     "typescript": "^6.0.3",

@@ -26,7 +26,7 @@
     "check": "echo \"$npm_package_name check ok\""
   },
   "dependencies": {
-    "oxlint-tsgolint": "^0.23.0"
+    "oxlint-tsgolint": "^0.25.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
