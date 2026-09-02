@@ -79,8 +79,8 @@
     "@vanilla-extract/css": "^1.20.1",
     "@vanilla-extract/recipes": "^0.5.7",
     "@vanilla-extract/rollup-plugin": "^1.5.3",
-    "@vitest/browser": "4.1.7",
-    "@vitest/browser-playwright": "4.1.7",
+    "@vitest/browser": "4.1.11",
+    "@vitest/browser-playwright": "4.1.11",
     "concurrently": "^8.2.2",
     "jsdom": "^24.0.0",
     "oxlint-tsgolint": "^0.23.0",
@@ -91,7 +91,7 @@
     "typescript": "^6.0.3",
     "vite": "7.3.3",
     "vite-plugin-solid": "^2.11.10",
-    "vitest": "4.1.7"
+    "vitest": "4.1.11"
   },
   "peerDependencies": {
     "@vanilla-extract/recipes": "^0.5.7",
