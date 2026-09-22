@@ -28,7 +28,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@astrojs/compiler-rs": "^0.2.1",
+    "@astrojs/compiler-rs": "^0.5.0",
     "@astrojs/node": "^10.1.1",
     "@astrojs/solid-js": "^6.0.1",
     "@rs/ryan-personal-website-astro-base": "workspace:*",
